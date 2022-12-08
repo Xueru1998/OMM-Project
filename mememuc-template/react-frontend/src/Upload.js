@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
-
+//this file controls the upload function and the function that adds the texts on the image
 const Upload = () => {
   const [image, setImage] = useState();
   const [text, setText] = useState("");
@@ -9,7 +9,7 @@ const Upload = () => {
     setImage(URL.createObjectURL(e.target.files[0]));
     console.log(e.target.files[0]);
   }
-  const change = (event) => {
+  const changeText = (event) => {
     setText(event.target.value);
     console.log(event.target.event);
   };
@@ -17,7 +17,7 @@ const Upload = () => {
   return (
     <div>
       <h2>Add Image:</h2>
-      <div class="row" id="box-search">
+      <div className="row" id="box-search">
         <div class="thumbnail text-center">
           <img
             src={image}
@@ -31,7 +31,7 @@ const Upload = () => {
           <input type="file" id="image-input" onChange={handleUploading} />
           <br />
           <br />
-          <div class="caption">
+          <div className="caption">
             <p>{text}</p>
           </div>
         </div>
@@ -40,7 +40,7 @@ const Upload = () => {
         type="text"
         id="message"
         name="message"
-        onChange={change}
+        onChange={changeText}
         value={text}
       />
       <br />

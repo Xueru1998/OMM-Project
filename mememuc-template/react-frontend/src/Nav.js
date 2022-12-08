@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+//the navigation bar "about" and "home"
 const Nav = () => {
   return (
     <nav>

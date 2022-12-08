@@ -1,4 +1,5 @@
 import React from "react";
+//the page for about
 function About() {
   return (
     <div>

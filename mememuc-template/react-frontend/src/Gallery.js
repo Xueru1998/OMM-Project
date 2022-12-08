@@ -1,6 +1,7 @@
 import React from "react";
 import img1 from "./pics/img1.jpg";
 import "./App.css";
+//this file is resposible for showing the existing pics
 
 function Display() {
   function handleClick(e) {
