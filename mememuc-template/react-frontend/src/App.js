@@ -1,7 +1,7 @@
-import "./App.css";
-import Nav from "./Nav";
-import Homepage from "./Homepage";
-import About from "./About";
+import "./styles/App.css";
+import Nav from "./pages/Nav";
+import Homepage from "./pages/Homepage";
+import About from "./pages/About";
 import { Routes, Route } from "react-router-dom";
 
 function App() {

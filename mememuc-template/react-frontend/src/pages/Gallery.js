@@ -1,8 +1,8 @@
 import React from "react";
-import img1 from "./pics/img1.jpg";
-import img2 from "./pics/img2.jpg";
-import dog from "./pics/dog.jpg";
-import "./App.css";
+import img1 from "../pics/img1.jpg";
+import img2 from "../pics/img2.jpg";
+import dog from "../pics/dog.jpg";
+import "../styles/gallery.css";
 //this file is resposible for showing the existing pics
 
 function Display() {

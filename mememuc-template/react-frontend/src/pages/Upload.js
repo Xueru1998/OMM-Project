@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./App.css";
+import "../styles/App.css";
 //this file controls the upload function and the function that adds the texts on the image
 const Upload = () => {
   const [image, setImage] = useState();
