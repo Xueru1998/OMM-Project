@@ -1,5 +1,4 @@
 import "./App.css";
-import React, { useState } from "react";
 import Nav from "./Nav";
 import Homepage from "./Homepage";
 import About from "./About";

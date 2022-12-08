@@ -36,3 +36,25 @@
     transform: rotate(360deg);
   }
 }
+
+.container {
+  position: relative;
+  text-align: center;
+}
+
+.botton-left {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
+
+.thumbnail {
+  position: relative;
+}
+
+.caption {
+  position: absolute;
+  top: 45%;
+  left: 0;
+  width: 100%;
+}
