@@ -7,17 +7,15 @@ const Upload = () => {
 
   function handleUploading(e) {
     setImage(URL.createObjectURL(e.target.files[0]));
-    console.log(e.target.files[0]);
   }
   const changeText = (event) => {
     setText(event.target.value);
-    console.log(event.target.event);
   };
 
   return (
     <div>
       <h2>Add Image:</h2>
-      <div className="row" id="box-search">
+      <div id="box-search">
         <div class="thumbnail text-center">
           <img
             src={image}
