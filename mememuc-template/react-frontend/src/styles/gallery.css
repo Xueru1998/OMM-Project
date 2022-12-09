@@ -5,11 +5,12 @@
   height: 250px;
 }
 
-.toHover #zoom figure img {
+.toHover figure img {
   transform: scale(1);
   transition: 0.3s ease-in-out;
 }
-.toHover #zoom figure:hover img {
+
+.toHover figure:hover img {
   transform: scale(1.5);
   border-style: outset;
 }

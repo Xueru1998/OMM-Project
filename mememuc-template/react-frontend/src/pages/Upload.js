@@ -1,50 +1,89 @@
-import React, { useState } from "react";
+import React from "react";
 import "../styles/App.css";
 //this file controls the upload function and the function that adds the texts on the image
-const Upload = () => {
-  const [image, setImage] = useState();
-  const [text, setText] = useState("");
 
-  function handleUploading(e) {
-    setImage(URL.createObjectURL(e.target.files[0]));
+class MainImage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.canvasRef = React.createRef();
+    this.imageRef = React.createRef();
+    this.downloadComposedImage = this.downloadComposedImage.bind(this);
   }
-  const changeText = (event) => {
-    setText(event.target.value);
-  };
 
-  return (
-    <div>
-      <h2>Add Image:</h2>
-      <div id="box-search">
-        <div class="thumbnail text-center">
+  componentDidUpdate() {
+    const canvas = this.canvasRef.current;
+    const img = this.imageRef.current;
+    const ctx = canvas.getContext("2d");
+
+    if (img.complete) {
+      ctx.fillStyle = "white";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "blue";
+      ctx.textAlign = "center";
+      ctx.font = "40px serif";
+      ctx.fillText(this.props.text, 150, 280, 280);
+    } else {
+      img.onload = () => {
+        ctx.fillStyle = "white";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "blue";
+        ctx.textAlign = "center";
+        ctx.font = "40px serif";
+        ctx.fillText(this.props.text, 150, 280, 280);
+      };
+    }
+  }
+
+  downloadComposedImage() {
+    const canvas = this.canvasRef.current;
+    const canvasUrl = canvas.toDataURL();
+    const eleAnchor = document.createElement("a");
+    eleAnchor.href = canvasUrl;
+    eleAnchor.download = "composed-image";
+    eleAnchor.click();
+    eleAnchor.remove();
+  }
+
+  render() {
+    return (
+      <div>
+        <div>
+          <canvas ref={this.canvasRef} width="300" height="300"></canvas>
           <img
-            src={image}
-            alt=""
-            class="img-responsive"
-            height="200"
-            width="300"
+            ref={this.imageRef}
+            src={this.props.image}
+            alt="a img"
+            className="hidden-image"
           />
-          <br />
-          <br />
-          <input type="file" id="image-input" onChange={handleUploading} />
-          <br />
-          <br />
-          <div className="caption">
-            <p>{text}</p>
-          </div>
+        </div>
+        <div>
+          <input
+            type="button"
+            value="download"
+            onClick={this.downloadComposedImage}
+          />
         </div>
       </div>
-      <input
-        type="text"
-        id="message"
-        name="message"
-        onChange={changeText}
-        value={text}
-      />
-      <br />
-      <br /> <br />
+    );
+  }
+}
+
+function InputGroup(props) {
+  return (
+    <div>
+      <div>
+        <input type="file" onChange={props.handleUploading} />
+        <input
+          type="text"
+          name="message"
+          onChange={props.changeText}
+          value={props.text}
+        />
+      </div>
     </div>
   );
-};
+}
 
-export default Upload;
+export { MainImage, InputGroup };
