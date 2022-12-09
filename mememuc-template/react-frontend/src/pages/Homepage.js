@@ -39,6 +39,8 @@ class Homepage extends React.Component {
       <div>
         <h1>Homepage</h1>
         <Search />
+        <br />
+        <h2>please select a template below or upload your own template!</h2>
         <MainImage image={this.state.image} text={this.state.text} />
         <InputGroup
           handleUploading={this.handleUploading}
