@@ -22,9 +22,12 @@ class MainImage extends React.Component {
       ctx.fillStyle = "blue";
       ctx.textAlign = "center";
       ctx.font = "40px serif";
+      //here to set the location of the text shown on image
       ctx.fillText(this.props.text, 150, 280, 280);
       ctx.fillText(this.props.text1, 200, 210, 220);
+      ctx.fillText(this.props.text2, 150, 200, 280);
     } else {
+      //else if the image is not fully loaded
       img.onload = () => {
         ctx.fillStyle = "white";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -34,10 +37,12 @@ class MainImage extends React.Component {
         ctx.font = "40px serif";
         ctx.fillText(this.props.text, 150, 280, 280);
         ctx.fillText(this.props.text1, 200, 210, 220);
+        ctx.fillText(this.props.text2, 150, 200, 280);
       };
     }
   }
 
+  //download image
   downloadComposedImage() {
     const canvas = this.canvasRef.current;
     const canvasUrl = canvas.toDataURL();
@@ -61,6 +66,7 @@ class MainImage extends React.Component {
           />
         </div>
         <div>
+          <br />
           <input
             type="button"
             value="download"
@@ -77,6 +83,14 @@ function InputGroup(props) {
     <div>
       <div>
         <input type="file" onChange={props.handleUploading} />
+
+        <br />
+        <input
+          type="text"
+          name="message"
+          onChange={props.changeText2}
+          value={props.text2}
+        />
         <br />
         <input
           type="text"
@@ -85,7 +99,7 @@ function InputGroup(props) {
           value={props.text1}
         />
       </div>
-      <br />
+
       <div>
         <input
           type="text"
