@@ -23,6 +23,7 @@ class MainImage extends React.Component {
       ctx.textAlign = "center";
       ctx.font = "40px serif";
       ctx.fillText(this.props.text, 150, 280, 280);
+      ctx.fillText(this.props.text1, 200, 210, 220);
     } else {
       img.onload = () => {
         ctx.fillStyle = "white";
@@ -32,6 +33,7 @@ class MainImage extends React.Component {
         ctx.textAlign = "center";
         ctx.font = "40px serif";
         ctx.fillText(this.props.text, 150, 280, 280);
+        ctx.fillText(this.props.text1, 200, 210, 220);
       };
     }
   }
@@ -75,6 +77,16 @@ function InputGroup(props) {
     <div>
       <div>
         <input type="file" onChange={props.handleUploading} />
+        <br />
+        <input
+          type="text"
+          name="message"
+          onChange={props.changeText1}
+          value={props.text1}
+        />
+      </div>
+      <br />
+      <div>
         <input
           type="text"
           name="message"
