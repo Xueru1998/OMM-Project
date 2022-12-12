@@ -19,6 +19,7 @@ class Homepage extends React.Component {
     this.changeText1 = this.changeText1.bind(this);
     this.changeText2 = this.changeText2.bind(this);
     this.selectImage = this.selectImage.bind(this);
+    this.clear = this.clear.bind(this);
   }
 
   handleUploading(e) {
@@ -45,6 +46,15 @@ class Homepage extends React.Component {
     });
   }
 
+  //clear the text on image
+  clear() {
+    this.setState({
+      text: "",
+      text1: "",
+      text2: "",
+    });
+  }
+
   selectImage(imgUrl) {
     this.setState({
       image: imgUrl,
@@ -64,6 +74,7 @@ class Homepage extends React.Component {
           text1={this.state.text1}
           text2={this.state.text2}
         />
+        <button onClick={this.clear}>clear</button>
         <InputGroup
           handleUploading={this.handleUploading}
           changeText={this.changeText}
