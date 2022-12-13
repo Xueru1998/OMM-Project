@@ -1,6 +1,7 @@
 import React from "react";
 import Search from "./Search";
 import Gallery from "./Gallery";
+
 import { MainImage, InputGroup } from "./Upload";
 
 class Homepage extends React.Component {
@@ -12,6 +13,7 @@ class Homepage extends React.Component {
       text: "",
       text1: "",
       text2: "",
+      data: null,
     };
 
     this.handleUploading = this.handleUploading.bind(this);
@@ -20,6 +22,10 @@ class Homepage extends React.Component {
     this.changeText2 = this.changeText2.bind(this);
     this.selectImage = this.selectImage.bind(this);
     this.clear = this.clear.bind(this);
+    this.search = this.search.bind(this);
+    this.randomShow = this.randomShow.bind(this);
+    this.initialURL = "https://api.imgflip.com/get_memes?per_page=5";
+    this.searchURL = `https://api.imgflip.com/search_memes?query=${this.input}&per_page=15&page=1`;
   }
 
   handleUploading(e) {
@@ -61,11 +67,32 @@ class Homepage extends React.Component {
     });
   }
 
+  search = async () => {
+    const dataFetch = await fetch(this.initialURL, {
+      method: "GET",
+      headers: {
+        Accept: "application.json",
+      },
+    });
+    let parsedData = await dataFetch.json();
+    this.setState({
+      data: parsedData.data.memes,
+    });
+    console.log(parsedData);
+    console.log(parsedData.data.memes[Math.floor(Math.random() * 100)]);
+  };
+
+  randomShow(imgUrl) {
+    this.setState({
+      image: "https://i.imgflip.com/24y43o.jpg",
+    });
+  }
+
   render() {
     return (
       <div>
         <h1>Homepage</h1>
-        <Search />
+        <Search data={this.state.data} search={this.search} />
         <br />
         <h2>please select a template below or upload your own template!</h2>
         <MainImage
@@ -74,7 +101,15 @@ class Homepage extends React.Component {
           text1={this.state.text1}
           text2={this.state.text2}
         />
-        <button onClick={this.clear}>clear</button>
+        <br />
+        <button className="button" onClick={this.randomShow}>
+          randomly show
+        </button>
+
+        <button className="button" onClick={this.clear}>
+          clear
+        </button>
+        <br />
         <InputGroup
           handleUploading={this.handleUploading}
           changeText={this.changeText}
@@ -84,7 +119,7 @@ class Homepage extends React.Component {
           text1={this.state.text1}
           text2={this.state.text2}
         />
-        <Gallery selectImage={this.selectImage} />
+        <Gallery selectImage={this.selectImage} data={this.state.data} />
       </div>
     );
   }

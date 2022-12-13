@@ -1,10 +1,4 @@
 import React from "react";
-import img1 from "../pics/img1.jpg";
-import img2 from "../pics/img2.jpg";
-import dog from "../pics/dog.jpg";
-import dog1 from "../pics/dog copy.jpg";
-import dog2 from "../pics/dog copy 2.jpg";
-import dog3 from "../pics/dog copy 3.jpg";
 import "../styles/gallery.css";
 //this file is resposible for showing the existing pics
 
@@ -32,11 +26,10 @@ class Gallery extends React.Component {
       startImageIndex: 0,
     };
 
-    this.imageUrls = [dog, img1, img2, dog1, dog2, dog3];
-
     this.handleImageClick = this.handleImageClick.bind(this);
     this.shiftLeft = this.shiftLeft.bind(this);
     this.shiftRight = this.shiftRight.bind(this);
+    this.imagesAPI = this.props.data;
   }
 
   shiftLeft() {
@@ -50,7 +43,7 @@ class Gallery extends React.Component {
 
   shiftRight() {
     const startImageIndex = this.state.startImageIndex;
-    if (startImageIndex < this.imageUrls.length - 3) {
+    if (startImageIndex < this.imagesAPI.length - 3) {
       this.setState({
         startImageIndex: startImageIndex + 1,
       });
@@ -62,19 +55,38 @@ class Gallery extends React.Component {
   }
 
   render() {
-    const galleryImages = this.imageUrls
-      .slice(this.state.startImageIndex, this.state.startImageIndex + 3)
-      .map((imageUrl) => (
-        <GalleryImage
-          key={imageUrl}
-          handleImageClick={this.handleImageClick}
-          imgUrl={imageUrl}
-        />
-      ));
+    // const galleryImages = this.imageUrls
+    //   .slice(this.state.startImageIndex, this.state.startImageIndex + 3)
+    //   .map((imageUrl) => (
+    //     <GalleryImage
+    //       key={imageUrl}
+    //       handleImageClick={this.handleImageClick}
+    //       imgUrl={imageUrl}
+    //     />
+    //   ));
+
+    const galleryImages =
+      this.imagesAPI &&
+      this.imagesAPI
+        .slice(this.state.startImageIndex, this.state.startImageIndex + 4)
+        .map(
+          (imagesAPI) => (
+            <GalleryImage
+              key={imagesAPI.id}
+              handleImageClick={this.handleImageClick}
+              imgUrl={imagesAPI.url}
+            />
+          ),
+          console.log(this.imagesAPI)
+        );
 
     return (
       <div>
-        <div className="row">{galleryImages}</div>
+        <div className="row">
+          {galleryImages}
+          {/* <img src="https://i.imgflip.com/30b1gx.jpg" alt="" /> */}
+        </div>
+
         <button className="button" onClick={this.shiftLeft}>
           previous
         </button>
