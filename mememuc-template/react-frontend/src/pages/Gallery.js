@@ -11,7 +11,7 @@ function GalleryImage(props) {
           className="image"
           alt=""
           height="100"
-          width="100"
+          width="120"
         />
       </figure>
     </div>
@@ -29,9 +29,9 @@ class Gallery extends React.Component {
     this.handleImageClick = this.handleImageClick.bind(this);
     this.shiftLeft = this.shiftLeft.bind(this);
     this.shiftRight = this.shiftRight.bind(this);
-    this.imagesAPI = this.props.data;
   }
 
+  //previous
   shiftLeft() {
     const startImageIndex = this.state.startImageIndex;
     if (startImageIndex > 0) {
@@ -41,9 +41,10 @@ class Gallery extends React.Component {
     }
   }
 
+  //next
   shiftRight() {
     const startImageIndex = this.state.startImageIndex;
-    if (startImageIndex < this.imagesAPI.length - 3) {
+    if (startImageIndex < this.props.memes.length - 9) {
       this.setState({
         startImageIndex: startImageIndex + 1,
       });
@@ -65,27 +66,25 @@ class Gallery extends React.Component {
     //     />
     //   ));
 
-    const galleryImages =
-      this.imagesAPI &&
-      this.imagesAPI
-        .slice(this.state.startImageIndex, this.state.startImageIndex + 4)
-        .map(
-          (imagesAPI) => (
-            <GalleryImage
-              key={imagesAPI.id}
-              handleImageClick={this.handleImageClick}
-              imgUrl={imagesAPI.url}
-            />
-          ),
-          console.log(this.imagesAPI)
-        );
+    //put memes in the gallery
+    let galleryImages = [];
+
+    if (this.props.memes.length !== 0) {
+      // api returns valid results
+      galleryImages = this.props.memes
+        .slice(this.state.startImageIndex, this.state.startImageIndex + 10)
+        .map((meme) => (
+          <GalleryImage
+            key={meme.id}
+            handleImageClick={this.handleImageClick}
+            imgUrl={meme.url}
+          />
+        ));
+    }
 
     return (
       <div>
-        <div className="row">
-          {galleryImages}
-          {/* <img src="https://i.imgflip.com/30b1gx.jpg" alt="" /> */}
-        </div>
+        <div className="my-row">{galleryImages}</div>
 
         <button className="button" onClick={this.shiftLeft}>
           previous

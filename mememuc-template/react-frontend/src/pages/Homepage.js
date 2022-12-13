@@ -1,11 +1,19 @@
 import React from "react";
 import Search from "./Search";
 import Gallery from "./Gallery";
-
+import Decorate from "./Decorate";
 import { MainImage, InputGroup } from "./Upload";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+
 class Homepage extends React.Component {
-  //set two text input text, text1 and text2
+  /**
+   * text, text1, text2: set three text input text, text1 and text2
+   * image: url of image
+   * memes: array of fetched memes' APIs
+   * decoratingImages: array of added images in the same canvas
+   * @param {*} props
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -13,7 +21,8 @@ class Homepage extends React.Component {
       text: "",
       text1: "",
       text2: "",
-      data: null,
+      memes: [],
+      decoratingImages: [],
     };
 
     this.handleUploading = this.handleUploading.bind(this);
@@ -21,11 +30,12 @@ class Homepage extends React.Component {
     this.changeText1 = this.changeText1.bind(this);
     this.changeText2 = this.changeText2.bind(this);
     this.selectImage = this.selectImage.bind(this);
-    this.clear = this.clear.bind(this);
+    this.decorateImage = this.decorateImage.bind(this);
     this.search = this.search.bind(this);
+    this.clear = this.clear.bind(this);
+
     this.randomShow = this.randomShow.bind(this);
-    this.initialURL = "https://api.imgflip.com/get_memes?per_page=5";
-    this.searchURL = `https://api.imgflip.com/search_memes?query=${this.input}&per_page=15&page=1`;
+    this.imgflipApiPrefix = "https://api.imgflip.com";
   }
 
   handleUploading(e) {
@@ -67,36 +77,88 @@ class Homepage extends React.Component {
     });
   }
 
-  search = async () => {
-    const dataFetch = await fetch(this.initialURL, {
-      method: "GET",
-      headers: {
-        Accept: "application.json",
-      },
+  //each added images in the same canvas has two state: url and position
+  decorateImage(imgUrl, imgPos) {
+    console.log(imgUrl, imgPos);
+    const decoratingImages = Array.from(this.state.decoratingImages);
+    decoratingImages.push({
+      url: imgUrl,
+      pos: imgPos,
     });
-    let parsedData = await dataFetch.json();
+    console.log("decorateImage...");
+    console.log(decoratingImages);
     this.setState({
-      data: parsedData.data.memes,
-    });
-    console.log(parsedData);
-    console.log(parsedData.data.memes[Math.floor(Math.random() * 100)]);
-  };
-
-  randomShow(imgUrl) {
-    this.setState({
-      image: "https://i.imgflip.com/24y43o.jpg",
+      decoratingImages: decoratingImages,
     });
   }
+
+  componentDidMount() {
+    this.search();
+  }
+
+  //fetch search url and parse, could be be used
+  search = async (keywords) => {
+    console.log(`keywords: ${keywords}`);
+    let url = "";
+    let method = "";
+    let body = null;
+    if (keywords && keywords.length !== 0) {
+      url = `${this.imgflipApiPrefix}/search_memes`;
+      method = "POST";
+      body = JSON.stringify({
+        username: "",
+        password: "",
+        query: keywords,
+      });
+    } else {
+      url = `${this.imgflipApiPrefix}/get_memes`;
+      method = "GET";
+    }
+
+    //fetch memes' url and parse to json file
+    const dataFetch = await fetch(url, {
+      method: method,
+      headers: {
+        Accept: "application/json",
+      },
+      body: body,
+    });
+    const parsedData = await dataFetch.json();
+    console.log(parsedData);
+    this.setState({
+      memes: parsedData.data.memes,
+    });
+  };
+
+  //random show the memes from API
+  randomShow = async () => {
+    const url = `${this.imgflipApiPrefix}/get_memes`;
+    const dataFetch = await fetch(url, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
+    });
+    const parsedData = await dataFetch.json();
+    const memes = parsedData.data.memes;
+    const index = Math.floor(Math.random() * memes.length);
+    const randMeme = memes[index];
+    console.log(randMeme);
+    this.setState({
+      image: randMeme.url,
+    });
+  };
 
   render() {
     return (
       <div>
         <h1>Homepage</h1>
-        <Search data={this.state.data} search={this.search} />
+        <Search search={this.search} />
         <br />
         <h2>please select a template below or upload your own template!</h2>
         <MainImage
           image={this.state.image}
+          decoratingImages={this.state.decoratingImages}
           text={this.state.text}
           text1={this.state.text1}
           text2={this.state.text2}
@@ -105,10 +167,11 @@ class Homepage extends React.Component {
         <button className="button" onClick={this.randomShow}>
           randomly show
         </button>
-
         <button className="button" onClick={this.clear}>
           clear
         </button>
+
+        <Decorate decorateImage={this.decorateImage} />
         <br />
         <InputGroup
           handleUploading={this.handleUploading}
@@ -119,7 +182,7 @@ class Homepage extends React.Component {
           text1={this.state.text1}
           text2={this.state.text2}
         />
-        <Gallery selectImage={this.selectImage} data={this.state.data} />
+        <Gallery selectImage={this.selectImage} memes={this.state.memes} />
       </div>
     );
   }
