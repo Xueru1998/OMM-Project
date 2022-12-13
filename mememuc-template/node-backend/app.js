@@ -26,7 +26,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("connecte d to MongoDB");
+    console.log("connected to MongoDB");
   })
   .catch((err) => {
     console.log("connected failed");
@@ -97,7 +97,7 @@ app.use("/users", usersRouter);
 app.use("/wiki", wiki);
 
 app.listen(3001, () => {
-  console.log("Server is running at port 3000");
+  console.log("Server is running at port 3001");
 });
 
 // catch 404 and forward to error handler

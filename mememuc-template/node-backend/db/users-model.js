@@ -35,7 +35,7 @@ student2
   })
   .catch((e) => {
     console.log("error has happened");
-    console.log(err);
+    console.log(e);
   });
 
 module.exports = User;
