@@ -6,15 +6,32 @@ function GalleryImage(props) {
   return (
     <div className="toHover">
       <figure onClick={() => props.handleImageClick(props.imgUrl)}>
-        <img
-          src={props.imgUrl}
-          className="image"
-          alt=""
-          height="100"
-          width="120"
-        />
+        <div className="thumbnail">
+          <img
+            src={props.imgUrl}
+            className="image"
+            alt=""
+            height="100"
+            width="120"
+          />
+          <div className="text">
+            <p>{props.name}</p>
+          </div>
+        </div>
       </figure>
     </div>
+    // <div className="toHover">
+    //   <figure onClick={() => props.handleImageClick(props.imgUrl)}>
+    //     <img
+    //       src={props.imgUrl}
+    //       className="image"
+    //       alt=""
+    //       height="100"
+    //       width="120"
+
+    //     />
+    //   </figure>
+    // </div>
   );
 }
 
@@ -44,7 +61,7 @@ class Gallery extends React.Component {
   //next
   shiftRight() {
     const startImageIndex = this.state.startImageIndex;
-    if (startImageIndex < this.props.memes.length - 9) {
+    if (startImageIndex < this.props.memes.length - 4) {
       this.setState({
         startImageIndex: startImageIndex + 1,
       });
@@ -72,12 +89,13 @@ class Gallery extends React.Component {
     if (this.props.memes.length !== 0) {
       // api returns valid results
       galleryImages = this.props.memes
-        .slice(this.state.startImageIndex, this.state.startImageIndex + 10)
+        .slice(this.state.startImageIndex, this.state.startImageIndex + 5)
         .map((meme) => (
           <GalleryImage
-            key={meme.id}
+            key={meme.name}
             handleImageClick={this.handleImageClick}
             imgUrl={meme.url}
+            name={meme.name}
           />
         ));
     }

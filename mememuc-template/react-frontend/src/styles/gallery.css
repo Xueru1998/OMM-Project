@@ -18,4 +18,8 @@
 .toHover {
   display: inline-block;
   text-align: center;
+  margin-right: 2rem;
+}
+.text {
+  font-size: small;
 }
