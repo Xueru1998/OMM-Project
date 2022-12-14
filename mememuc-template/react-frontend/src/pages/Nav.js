@@ -13,9 +13,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import logo from '../pic/logo.jpg';
 
-function NavScrollExample() {
+function NavigationBar() {
   return (
-      <Navbar bg="light" expand="lg">
+      <Navbar bg="dark" variant="dark" expand="lg">
         <Container fluid>
           <Navbar.Brand href="/">
             <img
@@ -59,4 +59,4 @@ function NavScrollExample() {
   );
 }
 
-export default NavScrollExample;
+export default NavigationBar;

@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/gallery.css";
 //this file is resposible for showing the existing pics
+import HorizontalScroll from 'react-scroll-horizontal';
 
 function GalleryImage(props) {
   return (
