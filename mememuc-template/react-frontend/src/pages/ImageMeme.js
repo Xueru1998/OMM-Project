@@ -24,6 +24,7 @@ class Homepage extends React.Component {
       memes: [],
       decoratingImages: [],
       name: [],
+      memesUrl: [],
     };
 
     this.handleUploading = this.handleUploading.bind(this);
@@ -127,9 +128,13 @@ class Homepage extends React.Component {
     const parsedData = await dataFetch.json();
 
     console.log(parsedData);
-    console.log(parsedData.data.memes);
+    // console.log(parsedData.data.memes);
+
     this.setState({
       memes: parsedData.data.memes,
+      memesUrl: parsedData.data.memes.map((memes) => memes.url),
+      name: parsedData.data.memes.map((memes) => memes.name),
+      image: parsedData.data.memes[0].url,
     });
   };
 
@@ -149,7 +154,6 @@ class Homepage extends React.Component {
     console.log(randMeme);
     this.setState({
       image: randMeme.url,
-      name: randMeme.name,
     });
   };
 
@@ -166,6 +170,7 @@ class Homepage extends React.Component {
           text={this.state.text}
           text1={this.state.text1}
           text2={this.state.text2}
+          name={this.state.name}
         />
         <br />
         <button className="button" onClick={this.randomShow}>
@@ -190,6 +195,8 @@ class Homepage extends React.Component {
           selectImage={this.selectImage}
           memes={this.state.memes}
           name={this.state.name}
+          memesUrl={this.state.memesUrl}
+          image={this.state.image}
         />
       </div>
     );
