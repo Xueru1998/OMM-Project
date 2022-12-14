@@ -1,7 +1,15 @@
 import React from "react";
 
 import Modal from "react-bootstrap/Modal";
+/**
+ * 
+solve insecure problems when download memes from api:
+ https://stackoverflow.com/questions/8126623/downloading-canvas-element-to-an-image
 
+code snipe:
+pop-up window form bootstrap:
+https://react-bootstrap.github.io/components/modal/
+ */
 class Decorate extends React.Component {
   constructor(props) {
     super(props);

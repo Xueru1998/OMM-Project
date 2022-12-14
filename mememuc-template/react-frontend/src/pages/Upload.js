@@ -1,5 +1,8 @@
 import React from "react";
 import "../styles/App.css";
+/**
+ * put text on image:https://gist.github.com/petehouston/85dd33210c0764eeae55
+ */
 //this file controls the upload function and the function that adds the texts on the image
 
 class MainImage extends React.Component {
