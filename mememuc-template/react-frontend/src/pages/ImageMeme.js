@@ -2,7 +2,7 @@ import React from "react";
 import Search from "./Search";
 import Gallery from "./Gallery";
 import Decorate from "./Decorate";
-import Generate from "./Generate";
+
 import { MainImage, InputGroup } from "./Upload";
 
 import "bootstrap/dist/css/bootstrap.min.css";
