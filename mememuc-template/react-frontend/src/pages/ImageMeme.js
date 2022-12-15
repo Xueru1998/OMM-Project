@@ -1,9 +1,8 @@
 import React from "react";
-import Search from "./Search";
 import Gallery from "./Gallery";
 import Decorate from "./Decorate";
-
-import { MainImage, InputGroup } from "./Upload";
+import MainImage from "./MainImage";
+import InputGroup from "./InputGroup";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 

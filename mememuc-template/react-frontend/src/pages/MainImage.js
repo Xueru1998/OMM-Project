@@ -30,14 +30,16 @@ class MainImage extends React.Component {
     this.state = {
       canvasRef: null,
       isPanelVisible: false,
+      canvasImgUrl: null,
     };
 
     this.canvasRef = React.createRef();
+    this.convertDataURItoBlob = this.convertDataURItoBlob.bind(this);
+    this.saveMeme = this.saveMeme.bind(this);
     this.downloadComposedImage = this.downloadComposedImage.bind(this);
     this.draw = this.draw.bind(this);
     this.showPanel = this.showPanel.bind(this);
     this.hidePanel = this.hidePanel.bind(this);
-    this.convertUrl = this.convertUrl.bind(this);
   }
 
   //bg-img: background image, the image first loaded
@@ -116,34 +118,60 @@ class MainImage extends React.Component {
     ctx.fillText(this.props.text2, 150, 200, 280);
   }
 
+  // https://stackoverflow.com/questions/4998908/convert-data-uri-to-file-then-append-to-formdata
+  convertDataURItoBlob(dataURI) {
+    var binary = atob(dataURI.split(',')[1]);
+    var array = [];
+    for(var i = 0; i < binary.length; i++) {
+        array.push(binary.charCodeAt(i));
+    }
+    return new Blob([new Uint8Array(array)], {type: 'image/jpeg'});
+  }
+
+  async saveMeme() {
+    const formData = new FormData();
+
+    const canvas = this.canvasRef.current;
+    const canvasImgUrl = canvas.toDataURL();
+
+    formData.append('file', this.convertDataURItoBlob(canvasImgUrl));
+    formData.append('name', 'random-name');
+    formData.append('author', '');
+
+    const res = await fetch('http://localhost:3003/memes/add_meme', {
+      method: 'POST',
+      body: formData,
+    });
+
+    console.log(res);
+  }
+
   //download image
   downloadComposedImage() {
     const canvas = this.canvasRef.current;
-    const canvasUrl = canvas.toDataURL();
+    const canvasImgUrl = canvas.toDataURL();
     const eleAnchor = document.createElement("a");
-    eleAnchor.href = canvasUrl;
+    eleAnchor.href = canvasImgUrl;
 
     eleAnchor.download = this.props.memeName;
     eleAnchor.click();
     eleAnchor.remove();
   }
 
-  convertUrl() {
-    const canvas = this.canvasRef.current;
-    const canvasUrl = canvas.toDataURL();
-
-    return canvasUrl;
-  }
-
   showPanel() {
+    const canvas = this.canvasRef.current;
+    const canvasImgUrl = canvas.toDataURL();
+
     this.setState({
       isPanelVisible: true,
+      canvasImgUrl: canvasImgUrl,
     });
   }
 
   hidePanel() {
     this.setState({
       isPanelVisible: false,
+      canvasImgUrl: null,
     });
   }
 
@@ -185,7 +213,7 @@ class MainImage extends React.Component {
 
                 <Modal.Body>
                   <img
-                    src={this.props.image}
+                    src={this.state.canvasImgUrl}
                     height="240px"
                     width="200px"
                     alt=""
@@ -227,7 +255,9 @@ class MainImage extends React.Component {
                 <Modal.Footer>
                   <Button onClick={this.downloadComposedImage}>download</Button>
 
-                  <Button variant="primary">Save changes</Button>
+                  <Button variant="primary" onClick={this.saveMeme}>
+                    Save changes
+                  </Button>
                   <Button
                     variant="secondary"
                     onClick={() => {
@@ -248,38 +278,4 @@ class MainImage extends React.Component {
   }
 }
 
-function InputGroup(props) {
-  return (
-    <div>
-      <div>
-        <input type="file" onChange={props.handleUploading} />
-
-        <br />
-        <input
-          type="text"
-          name="message"
-          onChange={props.changeText2}
-          value={props.text2}
-        />
-        <br />
-        <input
-          type="text"
-          name="message"
-          onChange={props.changeText1}
-          value={props.text1}
-        />
-      </div>
-
-      <div>
-        <input
-          type="text"
-          name="message"
-          onChange={props.changeText}
-          value={props.text}
-        />
-      </div>
-    </div>
-  );
-}
-
-export { MainImage, InputGroup };
+export default MainImage;
