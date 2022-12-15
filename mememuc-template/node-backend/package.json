@@ -4,19 +4,24 @@
   "private": true,
   "scripts": {
     "startdev": "node ./bin/www",
-    "start": "DBPORT=65535 && node ./bin/www"
+    "start": "SET DBPORT=65535 && node ./bin/www"
   },
   "dependencies": {
+    "alert": "^5.1.3",
+    "bcryptjs": "^2.4.3",
     "cookie-parser": "~1.4.4",
+    "cookie-session": "^2.0.0",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.8.0",
     "monk": "7.3.3",
     "morgan": "~1.9.1",
     "multer": "^1.4.5-lts.1",
-    "njwt": "^1.0.0"
+    "njwt": "^1.0.0",
+    "nodemailer": "^6.8.0"
   }
 }
