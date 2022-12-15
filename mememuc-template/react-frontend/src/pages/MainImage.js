@@ -7,9 +7,6 @@ import {
   EmailIcon,
   FacebookShareButton,
   FacebookIcon,
-  RedditShareButton,
-  TelegramShareButton,
-  TumblrShareButton,
   TwitterShareButton,
   TwitterIcon,
   WhatsappShareButton,
@@ -20,6 +17,7 @@ import {
  * put text on image:https://gist.github.com/petehouston/85dd33210c0764eeae55
  * share options: https://www.google.com/search?q=share+react&sxsrf=ALiCzsY85P13olZurY4q12lEthni5qJheg:1671069287877&source=lnms&tbm=vid&sa=X&ved=2ahUKEwja57Gawvr7AhW0SfEDHUkaCO4Q_AUoAnoECAEQBA&biw=1440&bih=764&dpr=2#fpstate=ive&vld=cid:d105195e,vid:9WzIACv_mxs
  * react-share: https://www.npmjs.com/package/react-share
+ * to convert uri to blob data https://stackoverflow.com/questions/4998908/convert-data-uri-to-file-then-append-to-formdata
  */
 //this file controls the upload function and the function that adds the texts on the image
 
@@ -118,14 +116,14 @@ class MainImage extends React.Component {
     ctx.fillText(this.props.text2, 150, 200, 280);
   }
 
-  // https://stackoverflow.com/questions/4998908/convert-data-uri-to-file-then-append-to-formdata
+  //
   convertDataURItoBlob(dataURI) {
-    var binary = atob(dataURI.split(',')[1]);
+    var binary = atob(dataURI.split(",")[1]);
     var array = [];
-    for(var i = 0; i < binary.length; i++) {
-        array.push(binary.charCodeAt(i));
+    for (var i = 0; i < binary.length; i++) {
+      array.push(binary.charCodeAt(i));
     }
-    return new Blob([new Uint8Array(array)], {type: 'image/jpeg'});
+    return new Blob([new Uint8Array(array)], { type: "image/jpeg" });
   }
 
   async saveMeme() {
@@ -134,12 +132,12 @@ class MainImage extends React.Component {
     const canvas = this.canvasRef.current;
     const canvasImgUrl = canvas.toDataURL();
 
-    formData.append('file', this.convertDataURItoBlob(canvasImgUrl));
-    formData.append('name', 'random-name');
-    formData.append('author', '');
+    formData.append("file", this.convertDataURItoBlob(canvasImgUrl));
+    formData.append("name", "random-name");
+    formData.append("author", "");
 
-    const res = await fetch('http://localhost:3003/memes/add_meme', {
-      method: 'POST',
+    const res = await fetch("http://localhost:3003/memes/add_meme", {
+      method: "POST",
       body: formData,
     });
 
