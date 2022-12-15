@@ -83,7 +83,7 @@ class Gallery extends React.Component {
 
     return (
       <div>
-        <div className="my-row">{galleryImages}</div>
+        <div className="my-row"></div>
 
         <button className="button" onClick={this.shiftLeft}>
           previous
@@ -93,12 +93,7 @@ class Gallery extends React.Component {
         </button>
 
         <div className="test">
-          <div className="testImage">
-            <img src={logo} alt="" />
-            <img src={logo} alt="" />
-            <img src={logo} alt="" />
-            <img src={logo} alt="" />v
-          </div>
+          <div className="horizontal">{galleryImages}</div>
         </div>
       </div>
     );

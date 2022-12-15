@@ -26,12 +26,8 @@
   font-size: small;
 }
 
-.test {
-}
-
-.testImage {
+.horizontal {
   overflow-x: auto;
-  height: 10cm;
-  width: 30cm;
-  display: inline-flex;
+
+  display: flex;
 }
