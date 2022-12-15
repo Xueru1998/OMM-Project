@@ -2,9 +2,24 @@ import React from "react";
 import "../styles/App.css";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { showPanel, hidePanel } from "./Decorate";
+import {
+  EmailShareButton,
+  EmailIcon,
+  FacebookShareButton,
+  FacebookIcon,
+  RedditShareButton,
+  TelegramShareButton,
+  TumblrShareButton,
+  TwitterShareButton,
+  TwitterIcon,
+  WhatsappShareButton,
+  WhatsappIcon,
+} from "react-share";
+
 /**
  * put text on image:https://gist.github.com/petehouston/85dd33210c0764eeae55
+ * share options: https://www.google.com/search?q=share+react&sxsrf=ALiCzsY85P13olZurY4q12lEthni5qJheg:1671069287877&source=lnms&tbm=vid&sa=X&ved=2ahUKEwja57Gawvr7AhW0SfEDHUkaCO4Q_AUoAnoECAEQBA&biw=1440&bih=764&dpr=2#fpstate=ive&vld=cid:d105195e,vid:9WzIACv_mxs
+ * react-share: https://www.npmjs.com/package/react-share
  */
 //this file controls the upload function and the function that adds the texts on the image
 
@@ -108,7 +123,7 @@ class MainImage extends React.Component {
     const eleAnchor = document.createElement("a");
     eleAnchor.href = canvasUrl;
 
-    eleAnchor.download = "composed-image";
+    eleAnchor.download = this.props.memeName;
     eleAnchor.click();
     eleAnchor.remove();
   }
@@ -174,6 +189,7 @@ class MainImage extends React.Component {
                     height="240px"
                     width="200px"
                     alt=""
+                    style={{ textAlign: "center" }}
                   />
                   <div>
                     <p>Do you agree to share your meme to our database?</p>
@@ -181,7 +197,30 @@ class MainImage extends React.Component {
                     <label for="a"></label>
                   </div>
                   <div>
-                    <input type="text" placeholder="Name your meme!" required />
+                    <input
+                      type="text"
+                      placeholder="Name your meme!"
+                      onChange={this.props.changeMemeName}
+                      required
+                    />
+                  </div>
+                  <br />
+                  <div className="share">
+                    <FacebookShareButton url={this.props.image}>
+                      <FacebookIcon size={40} round={true}></FacebookIcon>
+                    </FacebookShareButton>
+
+                    <TwitterShareButton url={this.props.image}>
+                      <TwitterIcon size={40} round={true}></TwitterIcon>
+                    </TwitterShareButton>
+
+                    <EmailShareButton url={this.props.image}>
+                      <EmailIcon size={40} round={true}></EmailIcon>
+                    </EmailShareButton>
+
+                    <WhatsappShareButton url={this.props.image}>
+                      <WhatsappIcon size={40} round={true}></WhatsappIcon>
+                    </WhatsappShareButton>
                   </div>
                 </Modal.Body>
 
