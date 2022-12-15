@@ -1,5 +1,8 @@
 import React from "react";
 import "../styles/App.css";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import { showPanel, hidePanel } from "./Decorate";
 /**
  * put text on image:https://gist.github.com/petehouston/85dd33210c0764eeae55
  */
@@ -9,11 +12,17 @@ class MainImage extends React.Component {
   constructor(props) {
     super(props);
 
-    // this.state = {};
+    this.state = {
+      canvasRef: null,
+      isPanelVisible: false,
+    };
 
     this.canvasRef = React.createRef();
     this.downloadComposedImage = this.downloadComposedImage.bind(this);
     this.draw = this.draw.bind(this);
+    this.showPanel = this.showPanel.bind(this);
+    this.hidePanel = this.hidePanel.bind(this);
+    this.convertUrl = this.convertUrl.bind(this);
   }
 
   //bg-img: background image, the image first loaded
@@ -98,9 +107,29 @@ class MainImage extends React.Component {
     const canvasUrl = canvas.toDataURL();
     const eleAnchor = document.createElement("a");
     eleAnchor.href = canvasUrl;
+
     eleAnchor.download = "composed-image";
     eleAnchor.click();
     eleAnchor.remove();
+  }
+
+  convertUrl() {
+    const canvas = this.canvasRef.current;
+    const canvasUrl = canvas.toDataURL();
+
+    return canvasUrl;
+  }
+
+  showPanel() {
+    this.setState({
+      isPanelVisible: true,
+    });
+  }
+
+  hidePanel() {
+    this.setState({
+      isPanelVisible: false,
+    });
   }
 
   render() {
@@ -126,15 +155,54 @@ class MainImage extends React.Component {
           />
           {elDecoratingImgs}
         </div>
+
         <div>
-          <br />
-          <input
-            target="_blank"
-            type="button"
-            value="download"
-            onClick={this.downloadComposedImage}
-          />
+          <button onClick={this.showPanel}>generate</button>
+          <div
+            className="modal show"
+            style={{ display: "block", position: "initial" }}
+          >
+            <Modal show={this.state.isPanelVisible} onHide={this.hidePanel}>
+              <Modal.Dialog>
+                <Modal.Header closeButton>
+                  <Modal.Title>This is your final meme!</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                  <img
+                    src={this.props.image}
+                    height="240px"
+                    width="200px"
+                    alt=""
+                  />
+                  <div>
+                    <p>Do you agree to share your meme to our database?</p>
+                    <input type="checkbox" name="" value="" />
+                    <label for="a"></label>
+                  </div>
+                  <div>
+                    <input type="text" placeholder="Name your meme!" required />
+                  </div>
+                </Modal.Body>
+
+                <Modal.Footer>
+                  <Button onClick={this.downloadComposedImage}>download</Button>
+
+                  <Button variant="primary">Save changes</Button>
+                  <Button
+                    variant="secondary"
+                    onClick={() => {
+                      this.hidePanel();
+                    }}
+                  >
+                    Close
+                  </Button>
+                </Modal.Footer>
+              </Modal.Dialog>
+            </Modal>
+          </div>
         </div>
+
         <br />
       </div>
     );

@@ -2,6 +2,7 @@ import React from "react";
 import Search from "./Search";
 import Gallery from "./Gallery";
 import Decorate from "./Decorate";
+import Generate from "./Generate";
 import { MainImage, InputGroup } from "./Upload";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -160,9 +161,8 @@ class Homepage extends React.Component {
   render() {
     return (
       <div>
-        <h1>Homepage</h1>
-        <Search search={this.search} />
-        <br />
+        <h1>Generate your Image meme here!</h1>
+
         <h2>please select a template below or upload your own template!</h2>
         <MainImage
           image={this.state.image}
@@ -182,6 +182,7 @@ class Homepage extends React.Component {
 
         <Decorate decorateImage={this.decorateImage} />
         <br />
+
         <InputGroup
           handleUploading={this.handleUploading}
           changeText={this.changeText}

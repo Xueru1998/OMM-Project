@@ -8,6 +8,7 @@
 .toHover figure img {
   transform: scale(1);
   transition: 0.3s ease-in-out;
+  overflow-inline: auto;
 }
 
 .toHover figure:hover img {
@@ -16,10 +17,21 @@
 }
 
 .toHover {
-  display: inline-block;
   text-align: center;
-  margin-right: 2rem;
+  /* margin-right: 2rem; */
+  display: inline-flex;
 }
+
 .text {
   font-size: small;
+}
+
+.test {
+}
+
+.testImage {
+  overflow-x: auto;
+  height: 10cm;
+  width: 30cm;
+  display: inline-flex;
 }
