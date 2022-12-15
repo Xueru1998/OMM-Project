@@ -5,6 +5,8 @@ add new package in react-frontend:
 1. "react-router-dom" for navigation
 2. "bootstrap" for pop-up windows (If npm i bootstrap cannot work, then please use "npm i react-bootstrap")
 3. "react-infinite-scroll-component" for endless scroll
+4. "react-scroll-horizontal" for horizontal scroll
+5. "react-input-multiline" for input multiline
 
 pics sourcs(copyright free):
 https://pixabay.com/
