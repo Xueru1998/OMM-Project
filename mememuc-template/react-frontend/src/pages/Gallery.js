@@ -3,8 +3,8 @@ import "../styles/gallery.css";
 import logo from "../pic/logo.jpg";
 //this file is resposible for showing the existing pics
 /**
- * hover effetc: https://www.youtube.com/watch?v=eZGHCRENcEk */
-import HorizontalScroll from "react-scroll-horizontal";
+ * hover effetc: https://www.youtube.com/watch?v=eZGHCRENcEk
+ * horizontally scroll: https://www.w3schools.com/cssref/css3_pr_overflow-x.php*/
 
 function GalleryImage(props) {
   return (
@@ -84,6 +84,10 @@ class Gallery extends React.Component {
     return (
       <div>
         <div className="my-row"></div>
+        <br />
+        <div>
+          <div className="horizontal">{galleryImages}</div>
+        </div>
 
         <button className="button" onClick={this.shiftLeft}>
           previous
@@ -91,10 +95,6 @@ class Gallery extends React.Component {
         <button className="button" onClick={this.shiftRight}>
           next
         </button>
-
-        <div className="test">
-          <div className="horizontal">{galleryImages}</div>
-        </div>
       </div>
     );
   }
