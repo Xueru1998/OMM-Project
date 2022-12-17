@@ -6,6 +6,7 @@ import Overview from "./pages/Overview";
 import SingleView from "./pages/SingleView";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import LoggedIn from "./pages/LoggedIn";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -17,9 +18,9 @@ function App() {
         <Route path="/about" element={<About />} />
           <Route path="/" element={<Overview />} />
           <Route path='/meme' element={<SingleView />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<Signup />} />
-
+          <Route path='/sign-in' element={<Login />} />
+          <Route path='/sign-up' element={<Signup />} />
+          <Route path='/userDetails' element={<LoggedIn />} />
       </Routes>
     </div>
   );
