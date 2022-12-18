@@ -1,9 +1,10 @@
 import React from "react";
 import "../styles/gallery.css";
+// import logo from "../pic/logo.jpg";
 //this file is resposible for showing the existing pics
 /**
  * hover effetc: https://www.youtube.com/watch?v=eZGHCRENcEk */
-import HorizontalScroll from "react-scroll-horizontal";
+// import HorizontalScroll from "react-scroll-horizontal";
 
 function GalleryImage(props) {
   return (
@@ -17,24 +18,13 @@ function GalleryImage(props) {
             height="100"
             width="120"
           />
+
           <div className="text">
             <p>{props.name}</p>
           </div>
         </div>
       </figure>
     </div>
-    // <div className="toHover">
-    //   <figure onClick={() => props.handleImageClick(props.imgUrl)}>
-    //     <img
-    //       src={props.imgUrl}
-    //       className="image"
-    //       alt=""
-    //       height="100"
-    //       width="120"
-
-    //     />
-    //   </figure>
-    // </div>
   );
 }
 
@@ -53,22 +43,32 @@ class Gallery extends React.Component {
 
   //previous
   shiftLeft() {
-    const startImageIndex = this.state.startImageIndex;
+    let startImageIndex = this.state.startImageIndex;
     if (startImageIndex > 0) {
-      this.setState({
-        startImageIndex: startImageIndex - 1,
-      });
+      startImageIndex -= 1;
+    } else {
+      startImageIndex = this.props.memes.length - 1;
     }
+    this.setState({
+      startImageIndex: startImageIndex,
+    });
+    const meme = this.props.memes[startImageIndex];
+    this.props.selectImage(meme.url);
   }
 
   //next
   shiftRight() {
-    const startImageIndex = this.state.startImageIndex;
-    if (startImageIndex < this.props.memes.length - 4) {
-      this.setState({
-        startImageIndex: startImageIndex + 1,
-      });
+    let startImageIndex = this.state.startImageIndex;
+    if (startImageIndex < this.props.memes.length - 1) {
+      startImageIndex += 1;
+    } else {
+      startImageIndex = 0;
     }
+    this.setState({
+      startImageIndex: startImageIndex,
+    });
+    const meme = this.props.memes[startImageIndex];
+    this.props.selectImage(meme.url);
   }
 
   handleImageClick(imgUrl) {
@@ -76,23 +76,19 @@ class Gallery extends React.Component {
   }
 
   render() {
-    // const galleryImages = this.imageUrls
-    //   .slice(this.state.startImageIndex, this.state.startImageIndex + 3)
-    //   .map((imageUrl) => (
-    //     <GalleryImage
-    //       key={imageUrl}
-    //       handleImageClick={this.handleImageClick}
-    //       imgUrl={imageUrl}
-    //     />
-    //   ));
-
     //put memes in the gallery
     let galleryImages = [];
 
     if (this.props.memes.length !== 0) {
       // api returns valid results
-      galleryImages = this.props.memes
-        .slice(this.state.startImageIndex, this.state.startImageIndex + 5)
+
+      const memes = Array.from(this.props.memes);
+
+      const memesFirst = memes.slice(this.state.startImageIndex);
+      const memesSecond = memes.slice(0, this.state.startImageIndex);
+
+      galleryImages = memesFirst
+        .concat(memesSecond)
         .map((meme) => (
           <GalleryImage
             key={meme.name}
@@ -105,14 +101,14 @@ class Gallery extends React.Component {
 
     return (
       <div>
-        <div className="my-row">{galleryImages}</div>
-
         <button className="button" onClick={this.shiftLeft}>
           previous
         </button>
         <button className="button" onClick={this.shiftRight}>
           next
         </button>
+
+        <div className="test">{galleryImages}</div>
       </div>
     );
   }

@@ -1,23 +1,18 @@
 # OMM-Project
 
 add new package in react-frontend:
+already upload package.json files from each folder, use npm i in each folder to download the dependencies/libraries/middlewares
+
+react-fron end:
 
 1. "react-router-dom" for navigation
 2. "bootstrap" for pop-up windows (If npm i bootstrap cannot work, then please use "npm i react-bootstrap")
-3. "react-infinite-scroll-component" for endless scroll
-4. "react-scroll-horizontal" for horizontal scroll
-5. "react-input-multiline" for input multiline
+3. "react-share" to give options for sharing memes
+4. react-input-multiline
+5. react-infinite-scroll-component
+6. react-scroll-horizontal --legacy-peer-deps
 
-pics sourcs(copyright free):
-https://pixabay.com/
+backend:
 
-put text on image:
-https://gist.github.com/petehouston/85dd33210c0764eeae55
-
-hover effetc: https://www.youtube.com/watch?v=eZGHCRENcEk
-
-solve insecure problems when download memes from api: https://stackoverflow.com/questions/8126623/downloading-canvas-element-to-an-image
-
-code snipe:
-pop-up window form bootstrap:
-https://react-bootstrap.github.io/components/modal/
+1. cors: to allows a server to indicate any origins (domain, scheme, or port) other than its own from which a browser should permit loading resources.
+2. multer: handling multipart/form-data, which is primarily used for uploading files.
