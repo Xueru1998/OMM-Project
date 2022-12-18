@@ -96,20 +96,19 @@ require("./models/user-model");
 const User = mongoose.model("UserInfo");
 
 // register part
-/** TODO: add confirmed password */
 app.post("/register", async (req, res) => {
-    const {username, email, password} = req.body;
+    const {username, password} = req.body;
     const encryptedPassword = await bcrypt.hash(password, 10);
 
     try {
-        const oldUser = await User.findOne({email});
+        const oldUser = await User.findOne({username});
 
         if (oldUser) {
-            return res.json({error: "User Exists"});
+            return res.json({error: "User already exists."});
         }
+
         await User.create({
             username,
-            email,
             password: encryptedPassword,
         });
         res.send({status: "ok"});
@@ -120,14 +119,14 @@ app.post("/register", async (req, res) => {
 
 // login part
 app.post("/login-user", async (req, res) => {
-    const {email, password} = req.body;
-    const user = await User.findOne({email});
+    const {username, password} = req.body;
+    const user = await User.findOne({username});
 
     if (!user) {
         return res.json({error: "User not found."});
     }
     if (await bcrypt.compare(password, user.password)) {
-        const token = jwt.sign({email: user.email}, JWT_SECRET);
+        const token = jwt.sign({username: user.username}, JWT_SECRET);
 
         if (res.status(201)) {
             return res.json({status: "ok", data: token});
@@ -146,8 +145,8 @@ app.post("/userData", async (req, res) => {
         const user = jwt.verify(token, JWT_SECRET);
         console.log(user);
 
-        const email = user.email;
-        User.findOne({email: useremail})
+        const username = user.username;
+        User.findOne({username: username})
             .then((data) => {
                 res.send({status: "ok", data: data});
             })
@@ -158,8 +157,8 @@ app.post("/userData", async (req, res) => {
     }
 });
 
-app.listen(5000, () => {
-    console.log("Server is running at port 5000");
+app.listen(3001, () => {
+    console.log("Server is running at port 3001");
 });
 
 // catch 404 and forward to error handler

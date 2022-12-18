@@ -8,9 +8,8 @@ const mongoose = require('mongoose');
 
 const UserDetailsSchema = new mongoose.Schema(
     {
-        username: {type: String, required: true},
-        email: {type: String, unique: true},
-        password: {type: String, required: true}
+        username: {type: String, required: true, minLength: 3, unique: true},
+        password: {type: String, required: true, minLength: 6}
     },
     {
         // Define the collection name stored in MongoDB Compass

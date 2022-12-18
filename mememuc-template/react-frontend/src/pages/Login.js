@@ -6,13 +6,14 @@
  * */
 
 import React from "react";
-import "../styles/login.css";
+import "../styles/form.css";
 
+// TODO: add error message, e.g. User not found. Invalid password.
 class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: "",
+            username: "",
             password: "",
         };
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,9 +21,9 @@ class Login extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        const {email, password} = this.state;
-        console.log(email, password);
-        fetch("http://localhost:5000/login-user", {
+        const {username, password} = this.state;
+        console.log(username, password);
+        fetch("http://localhost:3001/login-user", {
             method: "POST",
             crossDomain: true,
             headers: {
@@ -31,7 +32,7 @@ class Login extends React.Component {
                 "Access-Control-Allow-Origin": "*",
             },
             body: JSON.stringify({
-                email,
+                username,
                 password,
             }),
         })
@@ -48,16 +49,16 @@ class Login extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form className="form" onSubmit={this.handleSubmit}>
                 <h3>Sign In</h3>
 
                 <div className="mb-3">
-                    <label>Email address</label>
+                    <label>Username</label>
                     <input
-                        type="email"
+                        type="text"
                         className="form-control"
-                        placeholder="Enter email"
-                        onChange={(e) => this.setState({email: e.target.value})}
+                        placeholder="Username"
+                        onChange={(e) => this.setState({username: e.target.value})}
                     />
                 </div>
 
@@ -71,19 +72,6 @@ class Login extends React.Component {
                     />
                 </div>
 
-                <div className="mb-3">
-                    <div className="custom-control custom-checkbox">
-                        <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="customCheck1"
-                        />
-                        <label className="custom-control-label" htmlFor="customCheck1">
-                            Remember me
-                        </label>
-                    </div>
-                </div>
-
                 <div className="d-grid">
                     <button type="submit" className="btn btn-primary">
                         Submit
@@ -91,7 +79,7 @@ class Login extends React.Component {
                 </div>
 
                 <p className="forgot-password text-right">
-                    <a href="/sign-up">Sign Up</a>
+                    New here <a href="/sign-up">sign up!</a>
                 </p>
             </form>
         );

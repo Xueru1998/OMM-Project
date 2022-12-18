@@ -9,7 +9,7 @@ class LoggedIn extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:5000/userData", {
+        fetch("http://localhost:3001/userData", {
             method: "POST",
             crossDomain: true,
             headers: {
@@ -31,8 +31,8 @@ class LoggedIn extends React.Component {
     render() {
         return (
             <div>
-                Name<h1>{this.state.userData.fname}fsd</h1>
-                Email <h1>{this.state.userData.email}fdsd</h1>
+                Username<h1>{this.state.userData.username}</h1>
+                <h1>TODO: Need to show personal posts</h1>
             </div>
         );
     }
