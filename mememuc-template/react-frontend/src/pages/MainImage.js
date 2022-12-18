@@ -136,7 +136,7 @@ class MainImage extends React.Component {
     formData.append("name", "random-name");
     formData.append("author", "");
 
-    const res = await fetch("http://localhost:3003/memes/add_meme", {
+    const res = await fetch("http://localhost:3001/memes/add_meme", {
       method: "POST",
       body: formData,
     });
@@ -270,9 +270,9 @@ class MainImage extends React.Component {
           </div>
         </div>
 
-        {/* <div>
-          <img src='http://localhost:3003/memes/${1671116554469.jpg}' alt="" />
-        </div> */}
+        <div>
+          <img src="http://localhost:3003/memes/1671123317790.jpg" alt="" />
+        </div>
       </div>
     );
   }

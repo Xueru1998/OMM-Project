@@ -82,7 +82,7 @@ app.use("/users", usersRouter);
 app.use("/memes", memesRouter);
 app.use("/wiki", wiki);
 
-app.listen(3003, () => {
+app.listen(3001, () => {
   console.log("Server is running at port 3001");
 });
 
