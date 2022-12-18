@@ -5,17 +5,17 @@ class Signup extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            fname: "",
-            lname: "",
+            username: "",
             email: "",
             password: "",
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+
     handleSubmit(e) {
         e.preventDefault();
-        const { fname, lname, email, password } = this.state;
-        console.log(fname, lname, email, password);
+        const {username, email, password} = this.state;
+        console.log(username, email, password);
         fetch("http://localhost:5000/register", {
             method: "POST",
             crossDomain: true,
@@ -25,9 +25,8 @@ class Signup extends React.Component {
                 "Access-Control-Allow-Origin": "*",
             },
             body: JSON.stringify({
-                fname,
+                username,
                 email,
-                lname,
                 password,
             }),
         })
@@ -36,28 +35,19 @@ class Signup extends React.Component {
                 console.log(data, "userRegister");
             });
     }
+
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
                 <h3>Sign Up</h3>
 
                 <div className="mb-3">
-                    <label>First name</label>
+                    <label>Username</label>
                     <input
                         type="text"
                         className="form-control"
-                        placeholder="First name"
-                        onChange={(e) => this.setState({ fname: e.target.value })}
-                    />
-                </div>
-
-                <div className="mb-3">
-                    <label>Last name</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Last name"
-                        onChange={(e) => this.setState({ lname: e.target.value })}
+                        placeholder="Username"
+                        onChange={(e) => this.setState({username: e.target.value})}
                     />
                 </div>
 
@@ -67,7 +57,7 @@ class Signup extends React.Component {
                         type="email"
                         className="form-control"
                         placeholder="Enter email"
-                        onChange={(e) => this.setState({ email: e.target.value })}
+                        onChange={(e) => this.setState({email: e.target.value})}
                     />
                 </div>
 
@@ -77,7 +67,7 @@ class Signup extends React.Component {
                         type="password"
                         className="form-control"
                         placeholder="Enter password"
-                        onChange={(e) => this.setState({ password: e.target.value })}
+                        onChange={(e) => this.setState({password: e.target.value})}
                     />
                 </div>
 

@@ -17,9 +17,10 @@ class Login extends React.Component {
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+
     handleSubmit(e) {
         e.preventDefault();
-        const { email, password } = this.state;
+        const {email, password} = this.state;
         console.log(email, password);
         fetch("http://localhost:5000/login-user", {
             method: "POST",
@@ -44,6 +45,7 @@ class Login extends React.Component {
                 }
             });
     }
+
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
@@ -55,7 +57,7 @@ class Login extends React.Component {
                         type="email"
                         className="form-control"
                         placeholder="Enter email"
-                        onChange={(e) => this.setState({ email: e.target.value })}
+                        onChange={(e) => this.setState({email: e.target.value})}
                     />
                 </div>
 
@@ -65,7 +67,7 @@ class Login extends React.Component {
                         type="password"
                         className="form-control"
                         placeholder="Enter password"
-                        onChange={(e) => this.setState({ password: e.target.value })}
+                        onChange={(e) => this.setState({password: e.target.value})}
                     />
                 </div>
 
@@ -87,6 +89,7 @@ class Login extends React.Component {
                         Submit
                     </button>
                 </div>
+
                 <p className="forgot-password text-right">
                     <a href="/sign-up">Sign Up</a>
                 </p>

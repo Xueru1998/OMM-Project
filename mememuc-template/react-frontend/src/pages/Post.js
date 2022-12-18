@@ -1,4 +1,3 @@
-
 /**
  * References:
  * https://getbootstrap.com/docs/4.0/layout/media-object/#example
@@ -10,13 +9,14 @@ import "../styles/post.css";
 import logo from '../pic/logo.jpg';
 import Nav from "react-bootstrap/Nav";
 import React from "react";
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 function Post() {
 
     let navigate = useNavigate();
     const element = document.getElementById('singlepost')
-    function navigateToSingleView () {
+
+    function navigateToSingleView() {
         navigate('meme', {
             itemId: 1
         });

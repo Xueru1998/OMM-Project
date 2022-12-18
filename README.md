@@ -4,9 +4,17 @@ add new package in react-frontend:
 
 1. "react-router-dom" for navigation
 2. "bootstrap" for pop-up windows (If npm i bootstrap cannot work, then please use "npm i react-bootstrap")
-3. "react-infinite-scroll-component" for endless scroll
-4. "react-scroll-horizontal" for horizontal scroll
-5. "react-input-multiline" for input multiline
+3. "react-share" to give options for sharing memes
+4. "react-infinite-scroll-component" for endless scroll
+5. "react-scroll-horizontal" for horizontal scroll
+6. "react-input-multiline" for input multiline
+
+backend:
+
+1. cors: to allows a server to indicate any origins (domain, scheme, or port) other than its own from which a browser should permit loading resources.
+2. multer: handling multipart/form-data, which is primarily used for uploading files.
+3. bcryptjs: incorporate a salt to encrypt password.
+4. jsonwebtoken: for secure communication.
 
 pics sourcs(copyright free):
 https://pixabay.com/

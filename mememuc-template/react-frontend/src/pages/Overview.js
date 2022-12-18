@@ -28,41 +28,40 @@ function Overview() {
     };
 
     return (
-       <div>
-           <Navbar className="top">
-               <Container>
-                   <Nav className="me-auto">
-                       <Nav.Link href="/#sort=latest">New</Nav.Link>
-                       <Nav.Link href="/#sort=title">Title</Nav.Link>
-                       <NavDropdown
-                           title="Sort by"
-                           menuVariant="light">
-                           <NavDropdown.Item href="/#sort=votes">Votes</NavDropdown.Item>
-                           <NavDropdown.Item href="/#sort=views">Views</NavDropdown.Item>
-                       </NavDropdown>
-                   </Nav>
-               </Container>
-           </Navbar>
-           <Post/>
+        <div>
+            <Navbar className="top">
+                <Container>
+                    <Nav className="me-auto">
+                        <Nav.Link href="/#sort=latest">New</Nav.Link>
+                        <Nav.Link href="/#sort=title">Title</Nav.Link>
+                        <NavDropdown
+                            title="Sort by"
+                            menuVariant="light">
+                            <NavDropdown.Item href="/#sort=votes">Votes</NavDropdown.Item>
+                            <NavDropdown.Item href="/#sort=views">Views</NavDropdown.Item>
+                        </NavDropdown>
+                    </Nav>
+                </Container>
+            </Navbar>
+            <Post/>
 
-           <InfiniteScroll
-               dataLength={items.length} //This is important field to render the next data
-               next={fetchData}
-               hasMore={true}
-               loader={<h4>Loading...</h4>}
-               endMessage={
-                   <p style={{ textAlign: 'center' }}>
-                       <b>Yay! You have seen it all</b>
-                   </p>
-               }
+            <InfiniteScroll
+                dataLength={items.length} //This is important field to render the next data
+                next={fetchData}
+                hasMore={true}
+                loader={<h4>Loading...</h4>}
+                endMessage={
+                    <p style={{textAlign: 'center'}}>
+                        <b>Yay! You have seen it all</b>
+                    </p>
+                }
 
-           >
-               {items}
-           </InfiniteScroll>
+            >
+                {items}
+            </InfiniteScroll>
 
 
-       </div>
-
+        </div>
 
 
     );

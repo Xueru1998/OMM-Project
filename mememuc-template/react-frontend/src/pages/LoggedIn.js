@@ -7,6 +7,7 @@ class LoggedIn extends React.Component {
             userData: "",
         };
     }
+
     componentDidMount() {
         fetch("http://localhost:5000/userData", {
             method: "POST",
@@ -23,9 +24,10 @@ class LoggedIn extends React.Component {
             .then((res) => res.json())
             .then((data) => {
                 console.log(data, "userData");
-                this.setState({ userData: data.data });
+                this.setState({userData: data.data});
             });
     }
+
     render() {
         return (
             <div>
