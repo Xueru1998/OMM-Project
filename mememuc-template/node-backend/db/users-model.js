@@ -22,20 +22,20 @@ const userSchema = new mongoose.Schema({
 });
 const User = mongoose.model("User", userSchema);
 
-const student2 = new User({
-  username: "student1",
-  email: "123@qq.com",
-  password: "123",
-});
+// const student2 = new User({
+//   username: "student1",
+//   email: "123@qq.com",
+//   password: "123",
+// });
 
-student2
-  .save()
-  .then(() => {
-    console.log("student has been saved to database");
-  })
-  .catch((e) => {
-    console.log("error has happened");
-    console.log(e);
-  });
+// student2
+//   .save()
+//   .then(() => {
+//     console.log("student has been saved to database");
+//   })
+//   .catch((e) => {
+//     console.log("error has happened");
+//     console.log(e);
+//   });
 
 module.exports = User;
