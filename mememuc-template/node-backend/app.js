@@ -7,6 +7,7 @@
  * https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
  * npm website: https://www.npmjs.com/package/cors
  *
+ *
  */
 
 var createError = require("http-errors");
@@ -17,6 +18,8 @@ var logger = require("morgan");
 var cors = require("cors");
 const mongoose = require("mongoose");
 const { MongoClient, ServerApiVersion } = require("mongodb");
+const bodyParser = require("body-parser");
+const routes = require("./routes/memeJson_routes");
 
 // ##### IMPORTANT
 // ### Your backend project has to switch the MongoDB port like this
@@ -38,6 +41,7 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var memesRouter = require("./routes/memes");
 const wiki = require("./routes/wiki.js");
+console.log("1");
 
 var app = express();
 
@@ -51,6 +55,8 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(routes);
 
 app.use(function (req, res, next) {
   req.db = db;
@@ -77,13 +83,15 @@ app.use(function (req, res, next) {
 // })
 
 app.use(express.static(path.join(__dirname, "public")));
+
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/memes", memesRouter);
 app.use("/wiki", wiki);
+app.use("/memes", express.static(path.join(__dirname, "public/memes")));
 
-app.listen(3001, () => {
-  console.log("Server is running at port 3001");
+app.listen(3002, () => {
+  console.log("Server is running at port 3002");
 });
 
 // catch 404 and forward to error handler
@@ -101,5 +109,14 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
+
+// const testFolder = "./public/memes";
+// const fs = require("fs");
+
+// fs.readdir(testFolder, (err, files) => {
+//   files.forEach((file) => {
+//     console.log(file);
+//   });
+// });
 
 module.exports = app;

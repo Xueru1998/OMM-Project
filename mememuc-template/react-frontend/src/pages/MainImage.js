@@ -136,7 +136,7 @@ class MainImage extends React.Component {
     formData.append("name", "random-name");
     formData.append("author", "");
 
-    const res = await fetch("http://localhost:3001/memes/add_meme", {
+    const res = await fetch("http://localhost:3002/memes/add_meme", {
       method: "POST",
       body: formData,
     });

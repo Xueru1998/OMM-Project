@@ -1,0 +1,24 @@
+/**
+ * to create a controller for fetching all the memes' info from Mongo collection
+ using the find() method on your model and export it at the end.:
+ https://www.pluralsight.com/guides/get-json-of-mongo-collection-with-and-xhr-request
+ */
+
+const memeModel = require("../db/meme-model");
+
+const getMemes = (req, res) => {
+  memeModel
+    .find()
+    .then((result) => {
+      console.log("result: ", result);
+
+      res.send(result.length > 0 ? result : "No Memes");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+module.exports = {
+  getMemes,
+};
