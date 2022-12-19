@@ -3,7 +3,6 @@ import "../styles/gallery.css";
 //this file is resposible for showing the existing pics
 /**
  * hover effetc: https://www.youtube.com/watch?v=eZGHCRENcEk */
-import HorizontalScroll from "react-scroll-horizontal";
 
 function GalleryImage(props) {
   return (
