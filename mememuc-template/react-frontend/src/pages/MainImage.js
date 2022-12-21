@@ -269,10 +269,6 @@ class MainImage extends React.Component {
             </Modal>
           </div>
         </div>
-
-        <div>
-          <img src="http://localhost:3003/memes/1671123317790.jpg" alt="" />
-        </div>
       </div>
     );
   }

@@ -11,6 +11,8 @@ import logo from "../pic/logo.jpg";
 import Nav from "react-bootstrap/Nav";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Editor } from "react-draft-wysiwyg";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 // function Post() {
 //   let navigate = useNavigate();
