@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/App.css";
-
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 /**
  * put text on image:https://gist.github.com/petehouston/85dd33210c0764eeae55
@@ -9,38 +10,118 @@ import "../styles/App.css";
  */
 //this file controls the upload function and the function that adds the texts on the image
 
-function InputGroup(props) {
-  return (
-    <div>
-      <div>
-        <input type="file" onChange={props.handleUploading} />
+class InputGroup extends React.Component {
+  constructor(props) {
+    super(props);
 
-        <br />
-        <input
-          type="text"
-          name="message"
-          onChange={props.changeText2}
-          value={props.text2}
-        />
-        <br />
-        <input
-          type="text"
-          name="message"
-          onChange={props.changeText1}
-          value={props.text1}
-        />
-      </div>
+    this.state = {
+      isPanelVisible: false,
+      templateUrl: "",
+    };
+    this.showPanel = this.showPanel.bind(this);
+    this.hidePanel = this.hidePanel.bind(this);
+    this.changeTemplateUrl = this.changeTemplateUrl.bind(this);
+  }
 
+  changeTemplateUrl(e) {
+    this.setState({
+      templateUrl: e.target.value,
+    });
+  }
+
+  showPanel() {
+    this.setState({
+      isPanelVisible: true,
+    });
+  }
+
+  hidePanel() {
+    this.setState({
+      isPanelVisible: false,
+    });
+  }
+
+  render() {
+    return (
       <div>
-        <input
-          type="text"
-          name="message"
-          onChange={props.changeText}
-          value={props.text}
-        />
+        <div>
+          <button onClick={this.showPanel}>Upload a new template</button>
+
+          <div>
+            <Modal show={this.state.isPanelVisible} onHide={this.hidePanel}>
+              <Modal.Dialog>
+                <Modal.Header closeButton>
+                  <Modal.Title>Upload your own tempalte here!</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                  <input type="file" onChange={this.props.handleUploading} />
+                  <div>
+                    <input type="checkbox" name="" value="" />
+                    <label for="a"></label>
+                    <p>Allow this template to be uploaded in our database</p>
+                  </div>
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Please give your URL here!"
+                      onChange={this.changeTemplateUrl}
+                      value={this.props.templateUrl}
+                    />
+                  </div>
+                  <br />
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button
+                    variant="primary"
+                    onClick={() => {
+                      this.hidePanel();
+                    }}
+                  >
+                    upload
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    onClick={() => {
+                      this.hidePanel();
+                    }}
+                  >
+                    Close
+                  </Button>
+                </Modal.Footer>
+              </Modal.Dialog>
+            </Modal>
+          </div>
+        </div>
+
+        <div>
+          <br />
+          <input
+            type="text"
+            name="message"
+            onChange={this.props.changeText2}
+            value={this.props.text2}
+          />
+          <br />
+          <input
+            type="text"
+            name="message"
+            onChange={this.props.changeText1}
+            value={this.props.text1}
+          />
+        </div>
+
+        <div>
+          <input
+            type="text"
+            name="message"
+            onChange={this.props.changeText}
+            value={this.props.text}
+          />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default InputGroup;
