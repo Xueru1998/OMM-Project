@@ -72,3 +72,5 @@
 .hidden-image {
   display: none;
 }
+
+@import url(login.css);

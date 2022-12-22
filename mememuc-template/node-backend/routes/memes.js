@@ -19,7 +19,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-const memeModel = require("../db/meme-model");
+const memeModel = require("../models/meme-model");
 
 router.get("/get_memes", async function (req, res, next) {
   try {

@@ -40,7 +40,7 @@ db.once("open", function () {
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var memesRouter = require("./routes/memes");
-const wiki = require("./routes/wiki.js");
+
 console.log("1");
 
 var app = express();
@@ -87,7 +87,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/memes", memesRouter);
-app.use("/wiki", wiki);
+
 app.use("/memes", express.static(path.join(__dirname, "public/memes")));
 
 app.listen(3002, () => {

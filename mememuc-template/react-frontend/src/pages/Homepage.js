@@ -5,13 +5,9 @@
  * to fetch json file from mongodb:https://www.pluralsight.com/guides/get-json-of-mongo-collection-with-and-xhr-request
  * */
 
-import Card from "react-bootstrap/Card";
-import "../styles/post.css";
-import logo from "../pic/logo.jpg";
-import Nav from "react-bootstrap/Nav";
+import "../styles/homepage.css";
+import { Navigate, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 // function Post() {
@@ -82,31 +78,85 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 //     </>
 //   );
 // }
-
-function Post() {
-  const [createdMemes, setCreatedMemes] = useState();
-  useEffect(() => {
-    var request = new XMLHttpRequest();
-    request.onreadystatechange = function () {
-      if (request.readyState == 4 && request.status == 200) {
-        const response = JSON.parse(request.response);
-        setCreatedMemes(response);
-      }
-    };
-    request.open("GET", "http://localhost:3002/memesJson", true);
-    request.send();
-  }, []);
-
-  useEffect(() => {
-    console.log(createdMemes);
-  }, [createdMemes]);
+function Memes() {
   return (
-    <div className="App">
-      {createdMemes &&
-        createdMemes.map((createdMemes) => (
-          <img src={createdMemes.url} alt=""></img>
-        ))}
+    <div className="border">
+      <div className="container">
+        <img
+          src={this.state.createdMemes}
+          alt=""
+          height="200"
+          width="200"
+        ></img>
+      </div>
     </div>
   );
 }
-export default Post;
+class Homepage extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      createdMemes: [],
+      memesURL: [],
+      clickedUrl: null,
+    };
+    this.setMemes = this.setMemes.bind(this);
+    this.onClick = this.onClick.bind(this);
+  }
+
+  setMemes = async () => {
+    const url = "http://localhost:3002/memesJson";
+    const dataFetch = await fetch(url, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
+      /* body: body, */
+    });
+    const parsedData = await dataFetch.json();
+    console.log(parsedData);
+    this.setState({
+      createdMemes: parsedData,
+      memesURL: parsedData.map((memes) => memes.url),
+    });
+  };
+
+  componentDidMount() {
+    this.setMemes();
+  }
+
+  onClick() {
+    console.log(this.state.createdMemes.url);
+  }
+
+  render() {
+    Memes =
+      this.state.createdMemes &&
+      this.state.createdMemes.map((memes) => (
+        <div className="border">
+          <div className="container">
+            <h3>name: {memes.name}</h3>
+            <br />
+            <a href="/details" target="_self">
+              <img
+                src={memes.url}
+                alt=""
+                height="200"
+                width="200"
+                /* onClick={(event) => (window.location.href = "/details")} */
+                key={memes.name}
+              ></img>
+            </a>
+
+            <br />
+            <h4>author</h4>
+          </div>
+        </div>
+      ));
+
+    return <div>{Memes}</div>;
+  }
+}
+
+export default Homepage;

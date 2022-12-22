@@ -1,10 +1,10 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
-const userModel = require('../db/users-model');
+const userModel = require("../models/users-model");
 
 /* GET users listing. */
-router.get('/get_users', async function(req, res, next) {
+router.get("/get_users", async function (req, res, next) {
   // const db = req.db;
   //const users = db.get('users');
   // users.find({username: req.username},{ projection: {basicauthtoken: 0} }) // return all user properties, except the basic auth token
@@ -13,17 +13,17 @@ router.get('/get_users', async function(req, res, next) {
 
   const users = await userModel.find({});
 
-  console.log('Ouxxxx ');
+  console.log("Ouxxxx ");
 
   try {
     res.send(users);
-    console.log('Output: '+res.json);
+    console.log("Output: " + res.json);
   } catch (error) {
     res.status(500).send(error);
   }
 });
 
-router.post('/add_user', async (req, res) => {
+router.post("/add_user", async (req, res) => {
   const user = new userModel(req.body);
 
   try {

@@ -14,6 +14,9 @@ const Nav = () => {
         <li>
           <Link to="/ImageMeme">Make an image Meme</Link>
         </li>
+        <li>
+          <Link to="/login">Login</Link>
+        </li>
       </ul>
     </nav>
   );
