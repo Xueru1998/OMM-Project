@@ -10,7 +10,7 @@ class Details extends React.Component {
   render() {
     return (
       <div>
-        <h1>name</h1>
+        <h1>{localStorage.getItem("name")}</h1>
         <h2>author</h2>
         <h3>description</h3>
         <img

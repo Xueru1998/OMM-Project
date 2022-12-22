@@ -4,7 +4,7 @@
  https://www.pluralsight.com/guides/get-json-of-mongo-collection-with-and-xhr-request
  */
 
-const memeModel = require("../db/meme-model");
+const memeModel = require("../models/meme-model");
 
 const getMemes = (req, res) => {
   memeModel

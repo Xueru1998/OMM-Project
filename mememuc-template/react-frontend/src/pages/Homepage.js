@@ -3,6 +3,8 @@
  * https://getbootstrap.com/docs/4.0/layout/media-object/#example
  * https://stackoverflow.com/questions/50644976/react-button-onclick-redirect-page
  * to fetch json file from mongodb:https://www.pluralsight.com/guides/get-json-of-mongo-collection-with-and-xhr-request
+ * to use localstorage to store the img url and use in another component:
+ *
  * */
 
 import "../styles/homepage.css";
@@ -145,8 +147,11 @@ class Homepage extends React.Component {
     });
 
     window.localStorage.setItem("pic", e.target.getAttribute("src"));
+    window.localStorage.setItem("name", e.target.getAttribute("data-tag"));
     let a = localStorage.getItem("pic");
-    console.log(a);
+    let b = e.target.getAttribute("data-tag");
+
+    console.log(b);
   }
 
   render() {
@@ -163,9 +168,9 @@ class Homepage extends React.Component {
                 alt=""
                 height="200"
                 width="200"
-                /* onClick={(event) => (window.location.href = "/details")} */
                 onClick={(e) => this.onClick(e)}
                 key={memes.name}
+                data-tag={memes.name}
               ></img>
             </a>
 

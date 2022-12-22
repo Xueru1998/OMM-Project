@@ -13,9 +13,10 @@ const storage = multer.diskStorage({
     cb(null, "public/memes/");
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + ".jpg");
+    cb(null, +".jpg");
   },
 });
+/* cb(null, Date.now() + ".jpg"); */
 
 const upload = multer({ storage: storage });
 

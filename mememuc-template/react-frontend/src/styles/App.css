@@ -72,9 +72,11 @@
 .hidden-image {
   display: none;
 }
-
+/* code nipe of css for comment:
+https://www.w3docs.com/snippets/css/how-to-style-comment-box-using-css.html
+ */
 .comment {
-  width: 40%;
+  width: 50%;
   height: 100px;
   padding: 10px;
   background-color: wheat;

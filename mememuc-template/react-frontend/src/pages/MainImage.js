@@ -29,6 +29,7 @@ class MainImage extends React.Component {
       canvasRef: null,
       isPanelVisible: false,
       canvasImgUrl: null,
+      createImageName: null,
     };
 
     this.canvasRef = React.createRef();
@@ -38,8 +39,14 @@ class MainImage extends React.Component {
     this.draw = this.draw.bind(this);
     this.showPanel = this.showPanel.bind(this);
     this.hidePanel = this.hidePanel.bind(this);
+    this.setName = this.setName.bind(this);
   }
 
+  setName(e) {
+    this.setState({
+      createImageName: e.target.value,
+    });
+  }
   //bg-img: background image, the image first loaded
   componentDidUpdate() {
     const bgImage = document.getElementById("bg-img");
@@ -133,7 +140,7 @@ class MainImage extends React.Component {
     const canvasImgUrl = canvas.toDataURL();
 
     formData.append("file", this.convertDataURItoBlob(canvasImgUrl));
-    formData.append("name", "random-name");
+    formData.append("name", this.state.createImageName);
     formData.append("author", "");
 
     const res = await fetch("http://localhost:3002/memes/add_meme", {
@@ -151,7 +158,7 @@ class MainImage extends React.Component {
     const eleAnchor = document.createElement("a");
     eleAnchor.href = canvasImgUrl;
 
-    eleAnchor.download = this.props.memeName;
+    eleAnchor.download = this.state.createImageName;
     eleAnchor.click();
     eleAnchor.remove();
   }
@@ -226,7 +233,7 @@ class MainImage extends React.Component {
                     <input
                       type="text"
                       placeholder="Name your meme!"
-                      onChange={this.props.changeMemeName}
+                      onChange={this.setName}
                       required
                     />
                   </div>
