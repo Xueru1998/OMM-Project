@@ -147,7 +147,6 @@ class MainImage extends React.Component {
       method: "POST",
       body: formData,
     });
-
     console.log(res);
   }
 
