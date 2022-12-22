@@ -6,7 +6,7 @@ import InputGroup from "./InputGroup";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
-class Homepage extends React.Component {
+class ImageMeme extends React.Component {
   /**
    * text, text1, text2: set three text input text, text1 and text2
    * image: url of image
@@ -203,4 +203,4 @@ class Homepage extends React.Component {
   }
 }
 
-export default Homepage;
+export default ImageMeme;

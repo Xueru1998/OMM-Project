@@ -9,6 +9,7 @@ import "../styles/homepage.css";
 import { Navigate, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import Details from "./Details";
 
 // function Post() {
 //   let navigate = useNavigate();
@@ -92,6 +93,18 @@ function Memes() {
     </div>
   );
 }
+
+export function GetUrl(e) {
+  let clickedUrl = null;
+  /* let url = e.target.getAttribute("src");
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    localStorage.setItem("dataKey", JSON.stringify(url));
+  }, [data]); */
+  localStorage.setItem(clickedUrl, e.target.getAttribute("src"));
+  let value = localStorage.getItem(clickedUrl);
+  console.log(value);
+}
 class Homepage extends React.Component {
   constructor(props) {
     super(props);
@@ -126,8 +139,14 @@ class Homepage extends React.Component {
     this.setMemes();
   }
 
-  onClick() {
-    console.log(this.state.createdMemes.url);
+  onClick(e) {
+    this.setState({
+      clickedUrl: e.target.getAttribute("src"),
+    });
+
+    window.localStorage.setItem("pic", e.target.getAttribute("src"));
+    let a = localStorage.getItem("pic");
+    console.log(a);
   }
 
   render() {
@@ -145,6 +164,7 @@ class Homepage extends React.Component {
                 height="200"
                 width="200"
                 /* onClick={(event) => (window.location.href = "/details")} */
+                onClick={(e) => this.onClick(e)}
                 key={memes.name}
               ></img>
             </a>

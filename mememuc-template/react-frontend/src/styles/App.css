@@ -73,4 +73,13 @@
   display: none;
 }
 
+.comment {
+  width: 40%;
+  height: 100px;
+  padding: 10px;
+  background-color: wheat;
+  font: 1.4em/1.6em cursive;
+  color: #095484;
+}
+
 @import url(login.css);
