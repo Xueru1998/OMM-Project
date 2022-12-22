@@ -14,6 +14,7 @@ const memeSchema = new mongoose.Schema({
     data: Buffer,
     contentType: String,
   },
+  date: { type: String },
 });
 
 const Meme = mongoose.model("Meme", memeSchema);

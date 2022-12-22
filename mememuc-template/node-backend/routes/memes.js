@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
     cb(null, "public/memes/");
   },
   filename: function (req, file, cb) {
-    cb(null, "test" + ".jpg");
+    cb(null, Date.now() + ".jpg");
   },
 });
 /* cb(null, Date.now() + ".jpg"); */
@@ -40,6 +40,7 @@ router.post("/add_meme", upload.single("file"), async (req, res) => {
     // name: req.file.filename,
     name: req.body.name,
     url: `http://localhost:3002/memes/${req.file.filename}`,
+    date: Date.now(),
     // img: {
     //   // data: fs.readFileSync("/memes", req.file.filename),
     //   contentType: "image/png",
