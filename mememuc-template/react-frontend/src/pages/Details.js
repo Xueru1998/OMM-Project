@@ -5,7 +5,31 @@ import "../styles/App.css";
 class Details extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      memesURL: [],
+    };
   }
+  //random show the memes from database
+  randomShow = async () => {
+    const url = "http://localhost:3002/memesJson";
+    const dataFetch = await fetch(url, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
+    });
+    const parsedData = await dataFetch.json();
+
+    const index = Math.floor(Math.random() * parsedData.length);
+    const randMeme = parsedData[index];
+    console.log(randMeme);
+    this.setState({
+      memesURL: randMeme.url,
+    });
+    localStorage.setItem("pic", randMeme.url);
+    localStorage.setItem("name", randMeme.name);
+  };
 
   render() {
     return (
@@ -21,6 +45,9 @@ class Details extends React.Component {
         />
         <br />
         <br />
+        <button onClick={this.randomShow}>randomly show</button>
+        <br />
+        <br />
         <button className="button">next</button>
         <button className="button">previous</button>
         <br /> <br />
@@ -32,6 +59,7 @@ class Details extends React.Component {
         <br />
         <br />
         <button>submit</button>
+        <br />
       </div>
     );
   }

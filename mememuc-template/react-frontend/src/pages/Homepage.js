@@ -96,17 +96,6 @@ function Memes() {
   );
 }
 
-export function GetUrl(e) {
-  let clickedUrl = null;
-  /* let url = e.target.getAttribute("src");
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    localStorage.setItem("dataKey", JSON.stringify(url));
-  }, [data]); */
-  localStorage.setItem(clickedUrl, e.target.getAttribute("src"));
-  let value = localStorage.getItem(clickedUrl);
-  console.log(value);
-}
 class Homepage extends React.Component {
   constructor(props) {
     super(props);
