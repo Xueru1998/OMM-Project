@@ -8,10 +8,8 @@
  * */
 
 import "../styles/homepage.css";
-import { Navigate, useNavigate } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import Details from "./Details";
 
 // function Post() {
 //   let navigate = useNavigate();
@@ -137,7 +135,7 @@ class Homepage extends React.Component {
 
     window.localStorage.setItem("pic", e.target.getAttribute("src"));
     window.localStorage.setItem("name", e.target.getAttribute("data-tag"));
-    let a = localStorage.getItem("pic");
+
     let b = e.target.getAttribute("data-tag");
 
     console.log(b);

@@ -7,9 +7,52 @@ class Details extends React.Component {
     super(props);
 
     this.state = {
-      memesURL: [],
+      randomMemesURL: [],
+      memesIndex: null,
+      memesUrl: [],
+      length: null,
+      memes: [],
+      memesName: null,
     };
+
+    this.next = this.next.bind(this);
+    this.previous = this.previous.bind(this);
+    this.firstEntry = this.firstEntry.bind(this);
   }
+
+  firstEntry = async () => {
+    const url = "http://localhost:3002/memesJson";
+    const dataFetch = await fetch(url, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
+    });
+    const parsedData = await dataFetch.json();
+
+    /* console.log(randMeme); */
+    this.setState({
+      memesUrl: parsedData.map((memes) => memes.url),
+      /* memesIndex: index, */
+      length: parsedData.length,
+      memes: parsedData,
+      memesName: parsedData.map((memes) => memes.name),
+    });
+    var index = -1;
+    var memesName = localStorage.getItem("name");
+    var getIndex = this.state.memes.find(function (item, i) {
+      if (item.name === memesName) {
+        index = i;
+        return i;
+      }
+    });
+    console.log(index, getIndex);
+
+    this.setState({
+      memesIndex: index,
+    });
+  };
+
   //random show the memes from database
   randomShow = async () => {
     const url = "http://localhost:3002/memesJson";
@@ -23,13 +66,42 @@ class Details extends React.Component {
 
     const index = Math.floor(Math.random() * parsedData.length);
     const randMeme = parsedData[index];
-    console.log(randMeme);
+    /* console.log(randMeme); */
     this.setState({
-      memesURL: randMeme.url,
+      memesUrl: parsedData.map((memes) => memes.url),
+      memesIndex: index,
     });
     localStorage.setItem("pic", randMeme.url);
     localStorage.setItem("name", randMeme.name);
+
+    console.log(index);
   };
+
+  componentDidMount() {
+    this.firstEntry();
+  }
+  //bug!!!!!!
+  next() {
+    if (this.state.memesIndex < this.state.length)
+      this.setState({
+        memesIndex: this.state.memesIndex + 1,
+      });
+
+    localStorage.setItem("pic", this.state.memesUrl[this.state.memesIndex]);
+    localStorage.setItem("name", this.state.memesName[this.state.memesIndex]);
+  }
+
+  previous() {
+    if (this.state.memesIndex > 0) {
+      this.setState({
+        memesIndex: this.state.memesIndex - 1,
+      });
+      localStorage.setItem("pic", this.state.memesUrl[this.state.memesIndex]);
+      localStorage.setItem("name", this.state.memesName[this.state.memesIndex]);
+    }
+
+    console.log(this.state.memesIndex);
+  }
 
   render() {
     return (
@@ -48,8 +120,12 @@ class Details extends React.Component {
         <button onClick={this.randomShow}>randomly show</button>
         <br />
         <br />
-        <button className="button">next</button>
-        <button className="button">previous</button>
+        <button className="button" onClick={this.previous}>
+          previous
+        </button>
+        <button className="button" onClick={this.next}>
+          next
+        </button>
         <br /> <br />
         <input
           className="comment"
