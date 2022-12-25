@@ -1,55 +1,52 @@
-// code snippet of sign in:
-/* https://github.com/the-debug-arena/login-registration/blob/main/src/components/login_component.js */
+/**code snippet: signUP:
+ * https://github.com/the-debug-arena/login-registration/blob/main/src/components/signup_component.js
+ */
 import React, { Component } from "react";
 
-export default class Login extends Component {
+export default class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName: "",
+      username: "",
       password: "",
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit(e) {
     e.preventDefault();
-    const { userName, password } = this.state;
-    console.log(userName, password);
-    fetch("http://localhost:3002/login-user", {
+    const { username, password } = this.state;
+    console.log(username, password);
+    fetch("http://localhost:3002/users/register", {
       method: "POST",
       crossDomain: true,
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
         "Access-Control-Allow-Origin": "*",
+        mode: "no-cors",
       },
       body: JSON.stringify({
-        userName,
+        username,
         password,
       }),
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data, "userRegister");
-        if (data.status == "ok") {
-          alert("login successful");
-          window.localStorage.setItem("token", data.data);
-          window.location.href = "./userDetails";
-        }
       });
   }
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <h3>Sign In</h3>
+        <h3>Sign Up</h3>
 
         <div className="mb-3">
           <label>userName</label>
           <input
             type="text"
             className="form-control"
-            placeholder="Enter userName"
-            onChange={(e) => this.setState({ userName: e.target.value })}
+            placeholder="userName"
+            onChange={(e) => this.setState({ username: e.target.value })}
           />
         </div>
 
@@ -63,26 +60,13 @@ export default class Login extends Component {
           />
         </div>
 
-        <div className="mb-3">
-          <div className="custom-control custom-checkbox">
-            <input
-              type="checkbox"
-              className="custom-control-input"
-              id="customCheck1"
-            />
-            <label className="custom-control-label" htmlFor="customCheck1">
-              Remember me
-            </label>
-          </div>
-        </div>
-
         <div className="d-grid">
           <button type="submit" className="btn btn-primary">
-            Submit
+            Sign Up
           </button>
         </div>
         <p className="forgot-password text-right">
-          <a href="/sign-up">Sign Up</a>
+          Already registered <a href="/sign-in">sign in?</a>
         </p>
       </form>
     );

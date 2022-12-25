@@ -15,7 +15,7 @@ const Nav = () => {
           <Link to="/ImageMeme">Make an image Meme</Link>
         </li>
         <li>
-          <Link to="/login">Login</Link>
+          <Link to="/sign-in">Login</Link>
         </li>
       </ul>
     </nav>
