@@ -16,17 +16,11 @@ class InputGroup extends React.Component {
 
     this.state = {
       isPanelVisible: false,
-      templateUrl: "",
     };
     this.showPanel = this.showPanel.bind(this);
     this.hidePanel = this.hidePanel.bind(this);
-    this.changeTemplateUrl = this.changeTemplateUrl.bind(this);
-  }
 
-  changeTemplateUrl(e) {
-    this.setState({
-      templateUrl: e.target.value,
-    });
+    this.uploadBySelect = this.uploadBySelect.bind(this);
   }
 
   showPanel() {
@@ -39,6 +33,17 @@ class InputGroup extends React.Component {
     this.setState({
       isPanelVisible: false,
     });
+  }
+
+  uploadBySelect(e) {
+    this.props.handleUploading(e);
+    this.hidePanel();
+  }
+
+  uploadByUrl() {
+    this.props.handleUrlUploading();
+    this.hidePanel();
+    console.log(this.props.handleUrlUploading());
   }
 
   render() {
@@ -55,7 +60,7 @@ class InputGroup extends React.Component {
                 </Modal.Header>
 
                 <Modal.Body>
-                  <input type="file" onChange={this.props.handleUploading} />
+                  <input type="file" onChange={this.uploadBySelect} />
                   <div>
                     <input type="checkbox" name="" value="" />
                     <label for="a"></label>
@@ -65,7 +70,7 @@ class InputGroup extends React.Component {
                     <input
                       type="text"
                       placeholder="Please give your URL here!"
-                      onChange={this.changeTemplateUrl}
+                      onChange={this.props.changeTemplateUrl}
                       value={this.props.templateUrl}
                     />
                   </div>
@@ -75,7 +80,7 @@ class InputGroup extends React.Component {
                   <Button
                     variant="primary"
                     onClick={() => {
-                      this.hidePanel();
+                      this.uploadByUrl();
                     }}
                   >
                     upload

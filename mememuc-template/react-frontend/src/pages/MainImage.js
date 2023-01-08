@@ -15,6 +15,7 @@ import {
 
 /**
  * put text on image:https://gist.github.com/petehouston/85dd33210c0764eeae55
+ * how to use canvas to draw: https://medium.com/@pdx.lucasm/canvas-with-react-js-32e133c05258
  * share options: https://www.google.com/search?q=share+react&sxsrf=ALiCzsY85P13olZurY4q12lEthni5qJheg:1671069287877&source=lnms&tbm=vid&sa=X&ved=2ahUKEwja57Gawvr7AhW0SfEDHUkaCO4Q_AUoAnoECAEQBA&biw=1440&bih=764&dpr=2#fpstate=ive&vld=cid:d105195e,vid:9WzIACv_mxs
  * react-share: https://www.npmjs.com/package/react-share
  * to convert uri to blob data https://stackoverflow.com/questions/4998908/convert-data-uri-to-file-then-append-to-formdata

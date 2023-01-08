@@ -3,7 +3,7 @@ import Gallery from "./Gallery";
 import Decorate from "./Decorate";
 import MainImage from "./MainImage";
 import InputGroup from "./InputGroup";
-
+import "../styles/App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 class ImageMeme extends React.Component {
@@ -25,14 +25,18 @@ class ImageMeme extends React.Component {
       decoratingImages: [],
       name: [],
       memesUrl: [],
+      templateUrl: "",
     };
 
     this.handleUploading = this.handleUploading.bind(this);
+    this.handleUrlUploading = this.handleUrlUploading.bind(this);
     this.changeText = this.changeText.bind(this);
     this.changeText1 = this.changeText1.bind(this);
     this.changeText2 = this.changeText2.bind(this);
     this.selectImage = this.selectImage.bind(this);
     this.decorateImage = this.decorateImage.bind(this);
+    this.changeTemplateUrl = this.changeTemplateUrl.bind(this);
+
     this.search = this.search.bind(this);
     this.clear = this.clear.bind(this);
 
@@ -43,6 +47,18 @@ class ImageMeme extends React.Component {
   handleUploading(e) {
     this.setState({
       image: URL.createObjectURL(e.target.files[0]),
+    });
+  }
+
+  changeTemplateUrl(e) {
+    this.setState({
+      templateUrl: e.target.value,
+    });
+  }
+
+  handleUrlUploading() {
+    this.setState({
+      image: this.state.templateUrl,
     });
   }
 
@@ -184,6 +200,8 @@ class ImageMeme extends React.Component {
 
         <InputGroup
           handleUploading={this.handleUploading}
+          handleUrlUploading={this.handleUrlUploading}
+          changeTemplateUrl={this.changeTemplateUrl}
           changeText={this.changeText}
           changeText1={this.changeText1}
           changeText2={this.changeText2}
