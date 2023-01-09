@@ -110,13 +110,4 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-// const testFolder = "./public/memes";
-// const fs = require("fs");
-
-// fs.readdir(testFolder, (err, files) => {
-//   files.forEach((file) => {
-//     console.log(file);
-//   });
-// });
-
 module.exports = app;

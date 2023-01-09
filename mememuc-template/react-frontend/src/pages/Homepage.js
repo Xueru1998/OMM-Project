@@ -10,6 +10,8 @@
 import "../styles/homepage.css";
 import React from "react";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import likes from "../pic/likes.png";
+import dislikes from "../pic/dislikes.png";
 
 // function Post() {
 //   let navigate = useNavigate();
@@ -160,6 +162,18 @@ class Homepage extends React.Component {
                 data-tag={memes.name}
               ></img>
             </a>
+            <br />
+            <div>
+              <img
+                src={likes}
+                alt=""
+                height="30"
+                width="30"
+                className="button"
+              />
+              <img src={dislikes} alt="" height="30" width="30" />
+              <br />
+            </div>
 
             <br />
             <h4>author</h4>

@@ -1,7 +1,13 @@
 import React from "react";
 import Homepage from "./Homepage";
 import "../styles/App.css";
+import likes from "../pic/likes.png";
+import dislikes from "../pic/dislikes.png";
 //the page for about
+/**
+ * copyright free likes and dislikes icon:
+ * vexteezy: https://www.vecteezy.com/vector-art/5352847-like-and-dislike-icon-vector-design
+ */
 class Details extends React.Component {
   constructor(props) {
     super(props);
@@ -117,6 +123,10 @@ class Details extends React.Component {
         />
         <br />
         <br />
+        <img src={likes} alt="" height="30" width="30" className="button" />
+        <img src={dislikes} alt="" height="30" width="30" />
+        <br />
+        <br />
         <button onClick={this.randomShow}>randomly show</button>
         <br />
         <br />
@@ -133,6 +143,11 @@ class Details extends React.Component {
           placeholder="please give your comment here"
         />
         <br />
+        <br />
+        <p>
+          <a href="http://localhost:3000/sign-in">sign in</a> to leave a comment
+          here!
+        </p>
         <br />
         <button>submit</button>
         <br />
