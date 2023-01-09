@@ -41,6 +41,7 @@ class MainImage extends React.Component {
     this.showPanel = this.showPanel.bind(this);
     this.hidePanel = this.hidePanel.bind(this);
     this.setName = this.setName.bind(this);
+    this.saveChanges = this.saveChanges.bind(this);
   }
 
   setName(e) {
@@ -180,6 +181,11 @@ class MainImage extends React.Component {
     });
   }
 
+  saveChanges() {
+    this.saveMeme();
+    this.hidePanel();
+  }
+
   render() {
     const elDecoratingImgs = this.props.decoratingImages.map((imgObj, i) => (
       <img
@@ -260,7 +266,7 @@ class MainImage extends React.Component {
                 <Modal.Footer>
                   <Button onClick={this.downloadComposedImage}>download</Button>
 
-                  <Button variant="primary" onClick={this.saveMeme}>
+                  <Button variant="primary" onClick={this.saveChanges}>
                     Save changes
                   </Button>
                   <Button
